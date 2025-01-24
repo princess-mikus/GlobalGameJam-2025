@@ -1,22 +1,42 @@
-[gd_scene load_steps=4 format=3 uid="uid://brnkx57g2q4mu"]
+[gd_scene load_steps=5 format=3 uid="uid://brnkx57g2q4mu"]
 
-[ext_resource type="Script" path="res://character_body_3d.gd" id="1_0gvct"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_0gvct"]
+[ext_resource type="Texture2D" uid="uid://birur2h5s5eut" path="res://sprites/PLACEHOLDER_crosshair.png" id="2_3mxbu"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8hdl7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tob63"]
 
-[node name="Node3D" type="Node3D"]
-transform = Transform3D(0.119621, 0, 0, 0, 0.119621, 0, 0, 0, 0.119621, 0, 0, 0)
-
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+[node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_0gvct")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00299, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_8hdl7")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 0.270233, 0, 0, 0, 1, 0.733709, 0.407408, 0)
+mesh = SubResource("CapsuleMesh_8hdl7")
+skeleton = NodePath("../..")
+
+[node name="Gravity" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00299, 0)
+shape = SubResource("CapsuleShape3D_tob63")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00299, 0)
 mesh = SubResource("CapsuleMesh_8hdl7")
 skeleton = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00299, 0)
-shape = SubResource("CapsuleShape3D_tob63")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 0.270233, 0, 0, 0, 1, 0, 0.407, 0.168171)
+mesh = SubResource("CapsuleMesh_8hdl7")
+skeleton = NodePath("../..")
+
+[node name="Crosshair" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+texture = ExtResource("2_3mxbu")
