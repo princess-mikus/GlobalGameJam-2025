@@ -1,9 +1,7 @@
 extends CharacterBody3D
 
-
 const SPEED = 1.0
 const JUMP_VELOCITY = 0.0
-
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -22,3 +20,8 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+	
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		if collision.get_collider().name == "Enemy":
+			collision.get_collider().collision(collision.get_position())

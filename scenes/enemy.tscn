@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://2c4fomrvn2ts"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_aqc73"]
+[ext_resource type="Script" path="res://scripts/timer_player.gd" id="2_dvckm"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8hdl7"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tob63"]
+
+[node name="Enemy" type="CharacterBody3D"]
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0.12, 0)
+script = ExtResource("1_aqc73")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_8hdl7")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_tob63")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+script = ExtResource("2_dvckm")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
