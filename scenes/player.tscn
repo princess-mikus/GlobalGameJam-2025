@@ -23,6 +23,7 @@ skeleton = NodePath("../..")
 
 [node name="Gravity" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00299, 0)
+
 shape = SubResource("CapsuleShape3D_tob63")
 
 [node name="Pivot" type="Node3D" parent="."]

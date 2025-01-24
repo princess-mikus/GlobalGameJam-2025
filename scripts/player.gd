@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 const SPEED = 1.0
+
 const BULLET_SPEED = 5.0
 
 func _ready() -> void:
@@ -9,6 +10,16 @@ func _ready() -> void:
 
 @onready var bullet = preload("res://scenes/bullet.tscn")
 
+func _physics_process(delta: float) -> void:
+
+func _input(event):
+	if Input.is_action_pressed("shoot"):
+		var bubble = bubble_scene.instantiate()
+		bubble.transform.origin = global_position
+		bubble.direction = Vector3(1,0,0)
+		parent.add_child(bubble)
+		
+		
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
@@ -27,6 +38,7 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+
 	var camera = get_node("../Camera3D")
 	var viewport := get_viewport()
 	var mousePos = viewport.get_mouse_position()
@@ -40,3 +52,10 @@ func _physics_process(delta: float) -> void:
 
 func _input(event):
 	pass
+
+	
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		if collision.get_collider().name == "Enemy":
+			collision.get_collider().collision(collision.get_position())
+
