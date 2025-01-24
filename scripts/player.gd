@@ -3,7 +3,20 @@ extends CharacterBody3D
 const SPEED = 1.0
 const JUMP_VELOCITY = 0.0
 
+@onready var parent = $".."
+
+const bubble_scene: PackedScene = preload("res://scenes/bubble.tscn")
+
+func _input(event):
+	if Input.is_action_pressed("shoot"):
+		var bubble = bubble_scene.instantiate()
+		bubble.transform.origin = global_position
+		bubble.direction = Vector3(1,0,0)
+		parent.add_child(bubble)
+		
+		
 func _physics_process(delta: float) -> void:
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
