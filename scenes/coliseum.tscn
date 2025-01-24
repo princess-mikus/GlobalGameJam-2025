@@ -1,12 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://bvygg7tdu1buc"]
 
-[ext_resource type="PackedScene" uid="uid://brnkx57g2q4mu" path="res://scenes/player.tscn" id="1_6m13s"]
+[ext_resource type="PackedScene" uid="uid://brnkx57g2q4mu" path="res://scenes/player.tscn" id="1_8um1y"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ftxh5"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_y01ol"]
 
-[node name="Coliseo" type="Node3D"]
+[node name="Coliseum" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.999968, -0.00801096, 2.30757e-09, 0.00610174, 0.76165, 0.64796, -0.00519079, -0.647939, 0.761674, 0.052457, 0.99229, 1.51137)
+projection = 1
+fov = 116.76
+size = 1.80756
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.998324, -0.0428357, 0.0389143, 0.0118868, 0.809853, 0.586513, -0.0566385, -0.585067, 0.809005, -0.0228071, 0.856767, 1.6046)
@@ -22,11 +28,5 @@ shape = SubResource("CylinderShape3D_ftxh5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 mesh = SubResource("CylinderMesh_y01ol")
 
-[node name="Player" parent="." instance=ExtResource("1_6m13s")]
+[node name="Player" parent="." instance=ExtResource("1_8um1y")]
 transform = Transform3D(0.119621, 0, 0, 0, 0.119621, 0, 0, 0, 0.119621, 0.00500894, 0.00195909, 0.0139112)
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.999968, -0.00801096, 2.06882e-09, 0.00610174, 0.76165, 0.64796, -0.00519079, -0.647939, 0.761674, 0.052457, 0.99229, 1.51137)
-projection = 1
-fov = 116.76
-size = 1.80756
