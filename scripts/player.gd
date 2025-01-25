@@ -9,8 +9,9 @@ const nonChargedScale = 0.08
 const verticalOffset = 0.08
 const maxKnockbackSpeed = 1.5
 const timeKnockback = 0.1
-const damageArea = 5
-const gumArea = 3
+
+const damageArea = 10
+const gumArea = 5
 
 @onready var sprite = $Sprite3D
 @onready var bubble_scene = preload("res://scenes/bubble.tscn")
@@ -99,8 +100,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity = knockbackSpeed * knockback.normalized()
 		knockbackSpeed -= maxKnockbackSpeed/(60*timeKnockback)
-		print(knockbackSpeed)
-		print(maxKnockbackSpeed/(60*timeKnockback))
 
 	move_and_slide()
 
@@ -118,6 +117,7 @@ func _physics_process(delta: float) -> void:
 		sprite.flip_h = position.x - result.position.x >= 0
 
 func	_on_damage(position: Vector3):
+	print("HEY")
 	if knockbackSpeed <= 0:
 		var enemyCoor = transform.origin
 		knockback = enemyCoor - position

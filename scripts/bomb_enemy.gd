@@ -14,7 +14,7 @@ const maxKnockbackSpeed = 20
 const timeKnockback = 0.5
 const fallSpeed = 100
 const maxTimeFreeze = 2
-const damageArea = 0.14
+const damageArea = 0.22
 
 var dead = false
 var knockbackSpeed = 0
