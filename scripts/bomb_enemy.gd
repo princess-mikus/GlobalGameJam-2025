@@ -51,7 +51,7 @@ func _physics_process(delta: float) -> void:
 	velocity = delta * (direction + gravity)
 	
 	move_and_slide()
-	
+
 	if (position-player.position).length() <= damageArea:
 		player._on_damage(position)
 	
@@ -80,5 +80,4 @@ func _on_kaboom_timeout() -> void:
 	dead = true
 	explosion.position = position
 	get_node("..").add_child(explosion)
-	print("Morido")
 	queue_free()

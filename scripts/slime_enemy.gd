@@ -12,6 +12,7 @@ extends CharacterBody3D
 @onready var slimelingScene = preload("res://scenes/slimeling_enemy.tscn")
 
 const moveSpeed = 20
+
 const maxKnockbackSpeed = 40
 const timeKnockback = 1
 const fallSpeed = 100
@@ -24,7 +25,6 @@ var dead = false
 var knockbackSpeed = 0
 var knockback = Vector3.ZERO
 var timeFreeze = 0
-
 
 func _ready():
 	randomize()

@@ -44,7 +44,6 @@ func spawn():
 	parent.add_child(enemy)
 
 func _physics_process(delta: float) -> void:
-	
 	if coolDown > 0:
 		coolDown = coolDown-(1.0/60)
 	if coolDown <= 0:
