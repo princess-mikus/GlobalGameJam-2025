@@ -7,20 +7,20 @@ extends CharacterBody3D
 @onready var material = mesh.get_surface_override_material(0)
 @onready var originalColor = material.albedo_color
 @onready var originalPosition = transform.origin
-@onready var explosionScene = preload("res://scenes/explosion.tscn")
+
+@onready var slimelingScene = preload("res://scenes/slimeling_enemy.tscn")
 
 const moveSpeed = 20
-const maxKnockbackSpeed = 20
-const timeKnockback = 0.5
+const maxKnockbackSpeed = 100
+const timeKnockback = 1
 const fallSpeed = 100
 const maxTimeFreeze = 2
-const damageArea = 0.14
+const damageArea = 0.25
 
 var dead = false
 var knockbackSpeed = 0
 var knockback = Vector3.ZERO
 var timeFreeze = 0
-
 
 func _physics_process(delta: float) -> void:
 	
@@ -51,9 +51,10 @@ func _physics_process(delta: float) -> void:
 	velocity = delta * (direction + gravity)
 	
 	move_and_slide()
-
+	
 	if (position-player.position).length() <= damageArea:
 		player._on_damage(position)
+	
 	
 func collision(collision: Vector3, name: String):
 	if name == "Bubble" and timeFreeze <= 0:
@@ -64,20 +65,8 @@ func collision(collision: Vector3, name: String):
 	elif name == "Bubble_Gum":
 		knockbackSpeed = 0
 		timeFreeze = maxTimeFreeze
-		 #material.albedo_color = Color(0,0,1)
-
-func _on_area_3d_body_exited(body: Node3D) -> void:
-	dead = true
-	timer.start(3)
+		#material.albedo_color = Color(0,0,1)
 
 func _on_timer_timeout() -> void:
 	dead = false
-	position = Vector3(0.5,0.12,0)
-
-# Mira mi bombita tic tac tic
-func _on_kaboom_timeout() -> void:
-	var explosion = explosionScene.instantiate()
-	dead = true
-	explosion.position = position
-	get_node("..").add_child(explosion)
 	queue_free()
