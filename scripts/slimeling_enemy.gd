@@ -8,18 +8,19 @@ extends CharacterBody3D
 @onready var originalColor = material.albedo_color
 @onready var originalPosition = transform.origin
 
+@onready var slimelingScene = preload("res://scenes/slimeling_enemy.tscn")
+
 const moveSpeed = 20
-const maxKnockbackSpeed = 60
+const maxKnockbackSpeed = 100
 const timeKnockback = 1
 const fallSpeed = 100
 const maxTimeFreeze = 2
-const damageArea = 0.18
+const damageArea = 0.25
 
 var dead = false
 var knockbackSpeed = 0
 var knockback = Vector3.ZERO
 var timeFreeze = 0
-
 
 func _physics_process(delta: float) -> void:
 	
@@ -54,6 +55,7 @@ func _physics_process(delta: float) -> void:
 	if (position-player.position).length() <= damageArea:
 		player._on_damage(position)
 	
+	
 func collision(collision: Vector3, name: String):
 	if name == "Bubble" and timeFreeze <= 0:
 		var enemyCoor = transform.origin
@@ -64,3 +66,7 @@ func collision(collision: Vector3, name: String):
 		knockbackSpeed = 0
 		timeFreeze = maxTimeFreeze
 		#material.albedo_color = Color(0,0,1)
+
+func _on_timer_timeout() -> void:
+	dead = false
+	queue_free()
