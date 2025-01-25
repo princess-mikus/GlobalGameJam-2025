@@ -5,13 +5,13 @@ func _ready():
 	randomize()
 
 @onready var enemy_scene1 = preload("res://scenes/enemy.tscn")
-@onready var enemy_scene2 = preload("res://scenes/enemy.tscn")
-@onready var enemy_scene3 = preload("res://scenes/enemy.tscn")
+@onready var enemy_scene2 = preload("res://scenes/bomb_enemy.tscn")
+@onready var enemy_scene3 = preload("res://scenes/slime_enemy.tscn")
 
 @onready var parent = $".."
 @onready var player = $"../Player"
 
-var butget = 5
+var butget = 1
 const maxCoolDown = 3.0
 var coolDown = 0
 var queue = Array()
@@ -27,17 +27,17 @@ func spawn():
 	if (queue.is_empty()):
 		return;
 	var choice = [enemy_scene1, enemy_scene2, enemy_scene3]
-	var rand_x = randf_range(-0.6, 0.6)
-	var rand_y = randf_range(-0.6, 0.6)
-	if ((absf(rand_x) - absf(player.position.x) > spawnRadious)
-	&& (absf(rand_y) - absf(player.position.y) > spawnRadious)):
-		var enemy = choice[queue[0] - 1].instantiate()
-		print(queue[0])
-		queue.remove_at(0)
-		enemy.transform.origin = Vector3(rand_x,rand_y,player.position.z)
-		parent.add_child(enemy)
-	else:
-		spawn()
+	while (true):
+		var rand_x = randf_range(-0.6, 0.6)
+		var rand_z = randf_range(-0.6, 0.6)
+		if ((absf(rand_x) - absf(player.position.x) > spawnRadious)
+		&& (absf(rand_z) - absf(player.position.y) > spawnRadious)):
+			var enemy = choice[queue[0] - 1].instantiate()
+			print(queue[0])
+			queue.remove_at(0)
+			enemy.transform.origin = Vector3(rand_x,player.position.y,rand_z)
+			parent.add_child(enemy)
+			break
 
 func _physics_process(delta: float) -> void:
 	
