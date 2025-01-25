@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://jf7j8sgjyx5n"]
+
+[ext_resource type="Script" path="res://scripts/explosion.gd" id="1_6e28h"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ojpxf"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_332wn"]
+
+[node name="Explosion" type="Area3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+script = ExtResource("1_6e28h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_ojpxf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_332wn")
+
+[node name="Duration" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Duration" to="." method="_on_duration_timeout"]

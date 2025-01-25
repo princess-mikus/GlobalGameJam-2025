@@ -28,6 +28,10 @@ bubble_gum={
 ]
 }
 
+[input_devices]
+
+pointing/custom_image=""
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

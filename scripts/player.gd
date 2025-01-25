@@ -94,6 +94,12 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		if collision.get_collider().name == "Enemy":
+			collision.get_collider().collision(collision.get_position())
+
 	var camera = get_node("../Camera3D")
 	var viewport := get_viewport()
 	var mousePos = viewport.get_mouse_position()
@@ -103,9 +109,10 @@ func _physics_process(delta: float) -> void:
 	var query = PhysicsRayQueryParameters3D.create(origin, end)
 	var result = spaceState.intersect_ray(query)
 	if result:
+		$Crosshair.global_position = result.position
 		$Pivot.look_at(Vector3(result.position.x, 0, result.position.z))
 
-func damage(position: Vector3):
+func	_on_damage(position: Vector3):
 	if knockbackSpeed <= 0:
 		var enemyCoor = transform.origin
 		knockback = enemyCoor - position
