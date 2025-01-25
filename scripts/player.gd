@@ -2,14 +2,18 @@ extends CharacterBody3D
 
 const SPEED = 1.0
 const maxCoolDownBubble = 0.5
-const maxCoolDownBubbleGum = 5
+const maxCoolDownBubbleGum = 2.5
 const chargedElapsed = 1
 const chargedScale = 0.16
 const nonChargedScale = 0.08
 const verticalOffset = 0.08
+const maxKnockbackSpeed = 1.5
+const timeKnockback = 0.1
 
 @onready var bubble_scene = preload("res://scenes/bubble.tscn")
 @onready var bubble_gum_scene = preload("res://scenes/bubble_gum.tscn")
+@onready var mesh = $MeshInstance3D
+@onready var material = mesh.get_surface_override_material(0)
 @onready var parent = $".."
 @onready var pivot = $Pivot
 
@@ -19,6 +23,9 @@ var coolDownBubbleGum = 0
 var timeStart = 0
 var chargingBubble = null
 var scaleBubble = 0
+
+var knockbackSpeed = 0
+var knockback = Vector3.ZERO
 
 func _input(event):
 	if Input.is_action_just_released("bubble") and coolDownBubble <= 0 and chargingBubble != null:
@@ -68,21 +75,24 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")	
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+	
+	if knockbackSpeed <= 0:
+		var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")	
+		var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+		if direction:
+			velocity.x = direction.x * SPEED
+			velocity.z = direction.z * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+			velocity.z = move_toward(velocity.z, 0, SPEED)
+		material.albedo_color = Color(1,1,1)
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity = knockbackSpeed * knockback.normalized()
+		knockbackSpeed -= maxKnockbackSpeed/(60*timeKnockback)
+		print(knockbackSpeed)
+		print(maxKnockbackSpeed/(60*timeKnockback))
 
 	move_and_slide()
-
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		if collision.get_collider().name == "Enemy":
-			collision.get_collider().collision(collision.get_position(),"Player")
 
 	var camera = get_node("../Camera3D")
 	var viewport := get_viewport()
@@ -94,3 +104,10 @@ func _physics_process(delta: float) -> void:
 	var result = spaceState.intersect_ray(query)
 	if result:
 		$Pivot.look_at(Vector3(result.position.x, 0, result.position.z))
+
+func damage(position: Vector3):
+	if knockbackSpeed <= 0:
+		var enemyCoor = transform.origin
+		knockback = enemyCoor - position
+		knockbackSpeed = maxKnockbackSpeed
+		material.albedo_color = Color(1,0,0)

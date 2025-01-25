@@ -6,12 +6,14 @@ extends CharacterBody3D
 @onready var mesh = $MeshInstance3D
 @onready var material = mesh.get_surface_override_material(0)
 @onready var originalColor = material.albedo_color
+@onready var originalPosition = transform.origin
 
 const moveSpeed = 20
 const maxKnockbackSpeed = 60
 const timeKnockback = 1
 const maxTimeFreeze = 1
 const fallSpeed = 100
+const damageArea = 0.18
 
 var dead = false
 var knockbackSpeed = 0
@@ -37,7 +39,7 @@ func _physics_process(delta: float) -> void:
 		material.albedo_color = originalColor
 	elif knockbackSpeed > 0:
 		direction = knockbackSpeed * knockback.normalized()
-		knockbackSpeed -= maxKnockbackSpeed/(60/timeKnockback)
+		knockbackSpeed -= maxKnockbackSpeed/(60*timeKnockback)
 	elif timeFreeze > 0:
 		direction = Vector3.ZERO
 		timeFreeze -= (1.0/60)
@@ -48,6 +50,11 @@ func _physics_process(delta: float) -> void:
 	velocity = delta * (direction + gravity)
 	
 	move_and_slide()
+	
+	if (position-player.position).length() <= damageArea:
+		player.damage(position)
+	
+	
 	
 func collision(collision: Vector3, name: String):
 	if (name == "Player" or name == "Bubble") and timeFreeze <= 0:
@@ -60,10 +67,6 @@ func collision(collision: Vector3, name: String):
 		timeFreeze = maxTimeFreeze
 		material.albedo_color = Color(0,0,1)
 
-func _on_area_3d_body_exited(body: Node3D) -> void:
-	dead = true
-	timer.start(3)
-
 func _on_timer_timeout() -> void:
 	dead = false
-	position = Vector3(0.5,0.12,0)
+	position = originalPosition
