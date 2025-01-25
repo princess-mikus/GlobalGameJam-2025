@@ -1,0 +1,74 @@
+[gd_scene load_steps=11 format=3 uid="uid://h32tid45f2pb"]
+
+[ext_resource type="Texture2D" uid="uid://bv2khkcmi6d28" path="res://sprites/menuNamePlaceholder.png" id="1_8ewot"]
+[ext_resource type="Texture2D" uid="uid://dc6iven3lr2ad" path="res://sprites/pngtree-play-button-for-game-vector-png-image_9118607.png" id="2_v72n2"]
+[ext_resource type="Texture2D" uid="uid://dtsgk7orrqwfm" path="res://sprites/settings-button-3d-icon-download-in-png-blend-fbx-gltf-file-formats--setting-options-game-pack-indoor-games-icons-9686041.png" id="3_efqlg"]
+[ext_resource type="Script" path="res://scripts/menus/play_buttom.gd" id="3_s2enb"]
+[ext_resource type="Script" path="res://scripts/menus/exitButtom.gd" id="5_waww0"]
+[ext_resource type="Script" path="res://scripts/menus/settingButtom.gd" id="6_ps0xf"]
+[ext_resource type="Texture2D" uid="uid://1qej2koacjww" path="res://sprites/warm-gradient-line-drawing-of-a-cartoon-credit-card-png.png" id="7_qoohl"]
+[ext_resource type="Texture2D" uid="uid://dk6k320itrmi3" path="res://sprites/QuitButton.png" id="8_kuke8"]
+[ext_resource type="Script" path="res://scripts/menus/creditsButtom.gd" id="8_xtnmj"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3n5go"]
+load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
+
+[node name="menu" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="mainBackground" type="Sprite2D" parent="."]
+modulate = Color(100, 0, 7.554, 1)
+scale = Vector2(9, 5)
+texture = SubResource("CompressedTexture2D_3n5go")
+
+[node name="mainMenu" type="Node" parent="."]
+
+[node name="menuNamePlaceholder" type="Sprite2D" parent="mainMenu"]
+position = Vector2(0, -100)
+texture = ExtResource("1_8ewot")
+
+[node name="playButtom" type="Button" parent="mainMenu"]
+offset_left = -457.0
+offset_top = -32.0
+offset_right = -89.0
+offset_bottom = 336.0
+scale = Vector2(1.04648, 0.465171)
+icon = ExtResource("2_v72n2")
+script = ExtResource("3_s2enb")
+metadata/_edit_use_anchors_ = true
+
+[node name="settingButtom" type="Button" parent="mainMenu"]
+offset_left = 50.0
+offset_top = -24.0
+offset_right = 508.0
+offset_bottom = 434.0
+scale = Vector2(0.691669, 0.529053)
+icon = ExtResource("3_efqlg")
+script = ExtResource("6_ps0xf")
+
+[node name="creditsButtom" type="Button" parent="mainMenu"]
+offset_left = -456.0
+offset_top = 194.0
+offset_right = 87.0
+offset_bottom = 652.0
+scale = Vector2(0.711344, 0.254342)
+icon = ExtResource("7_qoohl")
+script = ExtResource("8_xtnmj")
+
+[node name="exitButtom" type="Button" parent="mainMenu"]
+offset_left = 326.0
+offset_top = 168.0
+offset_right = 1358.0
+offset_bottom = 944.0
+scale = Vector2(0.235704, 0.189272)
+icon = ExtResource("8_kuke8")
+script = ExtResource("5_waww0")
+
+[connection signal="button_up" from="mainMenu/playButtom" to="mainMenu/playButtom" method="_on_button_up"]
+[connection signal="button_up" from="mainMenu/settingButtom" to="mainMenu/playButtom" method="_on_setting_buttom_button_up"]
+[connection signal="button_up" from="mainMenu/settingButtom" to="mainMenu/settingButtom" method="_on_button_up"]
+[connection signal="button_up" from="mainMenu/creditsButtom" to="mainMenu/playButtom" method="_on_setting_buttom_button_up"]
+[connection signal="button_up" from="mainMenu/creditsButtom" to="mainMenu/creditsButtom" method="_on_button_up"]
+[connection signal="button_up" from="mainMenu/exitButtom" to="mainMenu/playButtom" method="_on_setting_buttom_button_up"]
+[connection signal="button_up" from="mainMenu/exitButtom" to="mainMenu/exitButtom" method="_on_button_up"]

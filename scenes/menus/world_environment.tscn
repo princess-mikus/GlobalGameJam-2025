@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://sm02oik05hkd"]
+
+[ext_resource type="Script" path="res://scripts/menus/world_environment.gd" id="1_gu5n8"]
+
+[sub_resource type="Environment" id="Environment_l2rg0"]
+background_mode = 3
+adjustment_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("Environment_l2rg0")
+script = ExtResource("1_gu5n8")
+
+[connection signal="updatePreviousScene" from="." to="." method="_on_update_previous_scene"]

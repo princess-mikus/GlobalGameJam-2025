@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://bs2fujfdyhutw"]
+
+[ext_resource type="Script" path="res://scripts/menus/pause.gd" id="1_ilsq8"]
+[ext_resource type="Script" path="res://scripts/menus/settingButtom.gd" id="2_whnoh"]
+
+[node name="pause" type="Node"]
+script = ExtResource("1_ilsq8")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="resumen" type="RichTextLabel" parent="."]
+offset_left = -154.0
+offset_top = -88.0
+offset_right = 157.0
+offset_bottom = 63.0
+bbcode_enabled = true
+text = "[center][font=resources/font.ttf][font_size=100][color=black]RESUMEN"
+fit_content = true
+autowrap_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="settingsMenu" type="RichTextLabel" parent="."]
+offset_left = -154.0
+offset_top = -33.0
+offset_right = 157.0
+offset_bottom = 167.0
+bbcode_enabled = true
+text = "[center][font=resources/font.ttf][font_size=100][color=black]
+settings
+"
+fit_content = true
+autowrap_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="settingsMenu"]
+modulate = Color(17.266, 3.237, 9.713, 0.569)
+offset_top = 53.0
+offset_right = 8.0
+offset_bottom = 61.0
+scale = Vector2(40.0078, 19.2208)
+script = ExtResource("2_whnoh")
+
+[node name="mainMenu" type="RichTextLabel" parent="."]
+offset_left = -154.0
+offset_top = 206.0
+offset_right = 157.0
+offset_bottom = 357.0
+bbcode_enabled = true
+text = "[center][font=resources/font.ttf][font_size=100
+][color=black]main menu"
+fit_content = true
+autowrap_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="title" type="RichTextLabel" parent="."]
+offset_left = -212.0
+offset_top = -296.0
+offset_right = 386.0
+offset_bottom = -128.0
+bbcode_enabled = true
+text = "[center][fill][font=resources/font2.ttf][font_size=150][color=black]PAUSE"
+fit_content = true
+autowrap_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[connection signal="button_up" from="settingsMenu/Button" to="settingsMenu/Button" method="_on_button_up"]

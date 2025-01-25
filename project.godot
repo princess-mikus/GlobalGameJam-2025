@@ -11,8 +11,17 @@ config_version=5
 [application]
 
 config/name="GGJ 2025"
+run/main_scene="res://scenes/menus/mainMenu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.svg"
+
+[autoload]
+
+GlobalWorldEnvironment="*res://scenes/menus/world_environment.tscn"
+
+[display]
+
+window/size/resizable=false
+window/stretch/mode="viewport"
 
 [rendering]
 
