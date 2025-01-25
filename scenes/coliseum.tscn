@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bvygg7tdu1buc"]
+[gd_scene load_steps=8 format=3 uid="uid://bvygg7tdu1buc"]
 
 [ext_resource type="PackedScene" uid="uid://brnkx57g2q4mu" path="res://scenes/player.tscn" id="1_6m13s"]
-[ext_resource type="PackedScene" path="res://scenes/enemy.tscn" id="2_7lhq0"]
+[ext_resource type="PackedScene" uid="uid://2c4fomrvn2ts" path="res://scenes/enemy.tscn" id="2_7lhq0"]
 [ext_resource type="PackedScene" uid="uid://b7sssgxvpba83" path="res://scenes/bomb_enemy.tscn" id="3_n2chm"]
+[ext_resource type="PackedScene" uid="uid://cl5cdy1uf0w2l" path="res://scenes/slime_enemy.tscn" id="4_57rtn"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ftxh5"]
 
@@ -33,6 +34,9 @@ transform = Transform3D(0.119621, 0, 0, 0, 0.119621, 0, 0, 0, 0.119621, 0.5, 0.1
 
 [node name="Bomb" parent="." instance=ExtResource("3_n2chm")]
 transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0.240483, 0.12, -0.93971)
+
+[node name="Slime" parent="." instance=ExtResource("4_57rtn")]
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 1.47478, 0.12, 0.522546)
 
 [node name="PlayZone" type="Area3D" parent="."]
 

@@ -5,7 +5,7 @@ extends CharacterBody3D
 
 @onready var mesh = $MeshInstance3D
 
-@onready var slimeling = preload("res://scenes/slimeling_enemy.tscn")
+@onready var slimeling_scene = preload("res://scenes/slimeling_enemy.tscn")
 
 const moveSpeed = 20
 const maxKnockbackSpeed = 60
@@ -48,6 +48,10 @@ func collision(collision: Vector3):
 
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	dead = true
+	for n in 3:
+		var slimeling = slimeling_scene.instantiate()
+		slimeling.position = position + Vector3(n * 10, 0, 0)
+		$"..".add_child(slimeling)
 	timer.start(3)
 
 func _on_timer_timeout() -> void:

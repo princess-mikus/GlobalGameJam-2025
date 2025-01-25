@@ -9,6 +9,6 @@ func _physics_process(delta: float) -> void:
 	linear_velocity = speed  *  delta * direction.normalized()
 	
 	for node in get_colliding_bodies():
-		if node.name == "Enemy" or node.name == "Bomb":
+		if node.name == "Enemy" or node.name == "Bomb" or node.name == "Slime" or node.name == "Slimeling":
 			node.collision(position)
 		queue_free()

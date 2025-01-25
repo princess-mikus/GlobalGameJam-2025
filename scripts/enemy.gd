@@ -21,7 +21,7 @@ func _physics_process(delta: float) -> void:
 	
 	# Add the gravity.
 	if not is_on_floor():
-		gravity = fallSpeed*Vector3(0,-1,0)
+		gravity = fallSpeed * Vector3(0,-1,0)
 	else:
 		gravity = Vector3.ZERO
 	

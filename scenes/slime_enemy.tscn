@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" path="res://scripts/slime_enemy.gd" id="1_0ma7g"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_8hdl7"]
+[sub_resource type="BoxMesh" id="BoxMesh_eqofg"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tob63"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_wu86k"]
+size = Vector3(1.7, 1.7, 1.7)
 
 [node name="Slime" type="CharacterBody3D"]
 transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0.12, 0)
@@ -12,11 +13,12 @@ collision_mask = 3
 script = ExtResource("1_0ma7g")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_8hdl7")
+transform = Transform3D(1.7, 0, 0, 0, 1.7, 0, 0, 0, 1.7, 0, 0, 0)
+mesh = SubResource("BoxMesh_eqofg")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_tob63")
+shape = SubResource("BoxShape3D_wu86k")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
