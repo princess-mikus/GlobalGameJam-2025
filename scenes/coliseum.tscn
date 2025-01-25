@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dd7xyrk3h6ey4"]
+[gd_scene load_steps=7 format=3 uid="uid://bvygg7tdu1buc"]
 
 [ext_resource type="PackedScene" uid="uid://brnkx57g2q4mu" path="res://scenes/player.tscn" id="1_6m13s"]
-[ext_resource type="PackedScene" uid="uid://2c4fomrvn2ts" path="res://scenes/enemy.tscn" id="2_7lhq0"]
+[ext_resource type="PackedScene" path="res://scenes/enemy.tscn" id="2_7lhq0"]
+[ext_resource type="PackedScene" uid="uid://b7sssgxvpba83" path="res://scenes/bomb_enemy.tscn" id="3_n2chm"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ftxh5"]
 
@@ -11,17 +12,11 @@
 
 [node name="Coliseum" type="Node3D"]
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1.00119, -0.00923129, 1.83476e-09, 0.0061092, 0.877672, 0.731931, -0.00519713, -0.74664, 0.860381, 0.03613, 1.32463, 1.62772)
-projection = 1
-fov = 116.76
-size = 1.80756
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.998324, -0.0428357, 0.0389143, 0.0118868, 0.809853, 0.586513, -0.0566385, -0.585067, 0.809005, -0.0228071, 0.856767, 1.6046)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
@@ -36,10 +31,11 @@ mesh = SubResource("CylinderMesh_y01ol")
 [node name="Enemy" parent="." instance=ExtResource("2_7lhq0")]
 transform = Transform3D(0.119621, 0, 0, 0, 0.119621, 0, 0, 0, 0.119621, 0.5, 0.12, 0)
 
+[node name="Bomb" parent="." instance=ExtResource("3_n2chm")]
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0.240483, 0.12, -0.93971)
+
 [node name="PlayZone" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayZone"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 shape = SubResource("CylinderShape3D_k6ckx")
-
-[connection signal="body_exited" from="PlayZone" to="Enemy" method="_on_area_3d_body_exited"]

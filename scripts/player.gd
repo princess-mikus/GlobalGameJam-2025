@@ -10,7 +10,6 @@ const maxCoolDown = 0.25
 var coolDown = 0
 
 func _input(event):
-	print(coolDown)
 	if Input.is_action_pressed("shoot") and coolDown <= 0:
 		coolDown = maxCoolDown
 		var bubble = bubble_scene.instantiate()
@@ -45,7 +44,7 @@ func _physics_process(delta: float) -> void:
 		if collision.get_collider().name == "Enemy":
 			collision.get_collider().collision(collision.get_position())
 
-	var camera = get_node("../Camera3D")
+	var camera = $Camera3D
 	var viewport := get_viewport()
 	var mousePos = viewport.get_mouse_position()
 	var spaceState = get_world_3d().direct_space_state
@@ -54,4 +53,8 @@ func _physics_process(delta: float) -> void:
 	var query = PhysicsRayQueryParameters3D.create(origin, end)
 	var result = spaceState.intersect_ray(query)
 	if result:
+		$Crosshair.global_position = result.position
 		$Pivot.look_at(Vector3(result.position.x, 0, result.position.z))
+
+func	_on_damage():
+	print("That's it, I'm dead")

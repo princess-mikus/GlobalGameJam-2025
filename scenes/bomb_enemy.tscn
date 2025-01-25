@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=3 uid="uid://b7sssgxvpba83"]
+
+[ext_resource type="Script" path="res://bomb_enemy.gd" id="1_kx3n1"]
+[ext_resource type="Material" uid="uid://bhqsipjp6txyo" path="res://Butano_placeholder.tres" id="2_meykp"]
+[ext_resource type="Material" uid="uid://b6yp3tetotxhv" path="res://Butano_exploder_placeholder.tres" id="3_wui53"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_qsgex"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wkg68"]
+
+[sub_resource type="Animation" id="Animation_lpioc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:material_override")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_meykp")]
+}
+
+[sub_resource type="Animation" id="Animation_bm8mo"]
+resource_name = "tic_tac"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:material_override")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_meykp"), ExtResource("3_wui53"), ExtResource("2_meykp")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_amulf"]
+_data = {
+"RESET": SubResource("Animation_lpioc"),
+"tic_tac": SubResource("Animation_bm8mo")
+}
+
+[node name="Bomb" type="CharacterBody3D"]
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0.12, 0)
+collision_mask = 3
+script = ExtResource("1_kx3n1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2_meykp")
+mesh = SubResource("SphereMesh_qsgex")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_wkg68")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Kaboom" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_amulf")
+}
+autoplay = "tic_tac"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Kaboom" to="." method="_on_kaboom_timeout"]
