@@ -10,5 +10,5 @@ func _physics_process(delta: float) -> void:
 	
 	for node in get_colliding_bodies():
 		if node.name == "Enemy":
-			node.collision(position,"Bubble")
+			node.collision(position,"Bubble_Gum")
 			queue_free()
