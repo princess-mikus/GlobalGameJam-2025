@@ -53,7 +53,7 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	
-func collision(collision: Vector3):
+func collision(collision: Vector3, name: String):
 	if (name == "Player" or name == "Bubble") and timeFreeze <= 0:
 		var enemyCoor = transform.origin
 		knockback = enemyCoor - collision
@@ -78,5 +78,6 @@ func _on_kaboom_timeout() -> void:
 	dead = true
 	print("Kaboom!!!")
 	explosion.position = position
+	get_node("../waveMaker").enemyDied(self)
 	get_node("..").add_child(explosion)
 	queue_free()

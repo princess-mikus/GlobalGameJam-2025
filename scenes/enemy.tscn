@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://2c4fomrvn2ts"]
+[gd_scene load_steps=6 format=3 uid="uid://2c4fomrvn2ts"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_aqc73"]
+[ext_resource type="Script" path="res://scripts/timer.gd" id="2_e8e5x"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8hdl7"]
 
@@ -24,5 +25,7 @@ shape = SubResource("CapsuleShape3D_tob63")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+script = ExtResource("2_e8e5x")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer" to="Timer" method="_on_timeout"]

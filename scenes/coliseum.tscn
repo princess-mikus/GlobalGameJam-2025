@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dd7xyrk3h6ey4"]
+[gd_scene load_steps=7 format=3 uid="uid://dd7xyrk3h6ey4"]
 
 [ext_resource type="PackedScene" uid="uid://brnkx57g2q4mu" path="res://scenes/player.tscn" id="1_6m13s"]
+[ext_resource type="Script" path="res://scripts/play_zone.gd" id="2_0cnod"]
 [ext_resource type="Script" path="res://scripts/wave_maker.gd" id="3_mt105"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ftxh5"]
@@ -16,6 +17,14 @@ transform = Transform3D(1.00119, -0.00923129, 1.83476e-09, 0.0061092, 0.877672, 
 projection = 1
 fov = 116.76
 size = 1.80756
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Camera3D"]
+offset_right = 1152.0
+offset_bottom = 137.0
+bbcode_enabled = true
+text = "[font_size=100][center][font=res://resources/font.ttf] Wave 1"
+fit_content = true
+scroll_active = false
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.998324, -0.0428357, 0.0389143, 0.0118868, 0.809853, 0.586513, -0.0566385, -0.585067, 0.809005, -0.0228071, 0.856767, 1.6046)
@@ -34,6 +43,7 @@ mesh = SubResource("CylinderMesh_y01ol")
 [node name="Player" parent="." instance=ExtResource("1_6m13s")]
 
 [node name="PlayZone" type="Area3D" parent="."]
+script = ExtResource("2_0cnod")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayZone"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
@@ -41,3 +51,5 @@ shape = SubResource("CylinderShape3D_k6ckx")
 
 [node name="waveMaker" type="Node" parent="."]
 script = ExtResource("3_mt105")
+
+[connection signal="body_exited" from="PlayZone" to="PlayZone" method="_on_body_exited"]
