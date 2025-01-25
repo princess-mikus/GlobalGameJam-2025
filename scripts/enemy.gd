@@ -5,6 +5,7 @@ extends CharacterBody3D
 
 @onready var mesh = $MeshInstance3D
 @onready var material = mesh.get_surface_override_material(0)
+@onready var originalColor = material.albedo_color
 
 const moveSpeed = 20
 const maxKnockbackSpeed = 60
@@ -33,7 +34,7 @@ func _physics_process(delta: float) -> void:
 		var playerCoor = player.transform.origin
 		var enemyCoor = transform.origin
 		direction = moveSpeed * (playerCoor - enemyCoor).normalized()
-		material.albedo_color = Color(1,1,1)
+		material.albedo_color = originalColor
 	elif knockbackSpeed > 0:
 		direction = knockbackSpeed * knockback.normalized()
 		knockbackSpeed -= maxKnockbackSpeed/(60/timeKnockback)
@@ -42,7 +43,7 @@ func _physics_process(delta: float) -> void:
 		timeFreeze -= (1.0/60)
 	else:
 		direction = Vector3.ZERO
-		material.albedo_color = Color(1,1,1)
+		material.albedo_color = originalColor
 	
 	velocity = delta * (direction + gravity)
 	
