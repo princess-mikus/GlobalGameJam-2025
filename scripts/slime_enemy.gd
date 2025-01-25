@@ -8,6 +8,8 @@ extends CharacterBody3D
 @onready var originalColor = material.albedo_color
 @onready var originalPosition = transform.origin
 
+@onready var slimelingScene = preload("res://scenes/slimeling_enemy.tscn")
+
 const moveSpeed = 20
 const maxKnockbackSpeed = 60
 const timeKnockback = 1
@@ -20,7 +22,6 @@ var knockbackSpeed = 0
 var knockback = Vector3.ZERO
 var timeFreeze = 0
 
-
 func _physics_process(delta: float) -> void:
 	
 	var gravity
@@ -28,11 +29,11 @@ func _physics_process(delta: float) -> void:
 	
 	# Add the gravity.
 	if not is_on_floor():
-		gravity = fallSpeed * Vector3(0,-1,0)
+		gravity = fallSpeed*Vector3(0,-1,0)
 	else:
 		gravity = Vector3.ZERO
 	
-	if not dead and knockbackSpeed <= 0 and timeFreeze <= 0:
+	if not dead and knockbackSpeed == 0:
 		var playerCoor = player.transform.origin
 		var enemyCoor = transform.origin
 		direction = moveSpeed * (playerCoor - enemyCoor).normalized()
@@ -54,6 +55,7 @@ func _physics_process(delta: float) -> void:
 	if (position-player.position).length() <= damageArea:
 		player._on_damage(position)
 	
+	
 func collision(collision: Vector3, name: String):
 	if (name == "Player" or name == "Bubble") and timeFreeze <= 0:
 		var enemyCoor = transform.origin
@@ -65,6 +67,14 @@ func collision(collision: Vector3, name: String):
 		timeFreeze = maxTimeFreeze
 		material.albedo_color = Color(0,0,1)
 
+func _on_area_3d_body_exited(body: Node3D) -> void:
+	dead = true
+	for n in 3:
+		var slimeling = slimelingScene.instantiate()
+		slimeling.position = position + Vector3(n * 10, 0, 0)
+		$"..".add_child(slimeling)
+	timer.start(3)
+
 func _on_timer_timeout() -> void:
 	dead = false
-	position = originalPosition
+	queue_free()

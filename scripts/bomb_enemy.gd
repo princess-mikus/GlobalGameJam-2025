@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+
 @onready var player = $"../Player"
 @onready var timer = $Timer
 
@@ -7,10 +8,11 @@ extends CharacterBody3D
 @onready var material = mesh.get_surface_override_material(0)
 @onready var originalColor = material.albedo_color
 @onready var originalPosition = transform.origin
+@onready var explosionScene = preload("res://scenes/explosion.tscn")
 
 const moveSpeed = 20
-const maxKnockbackSpeed = 60
-const timeKnockback = 1
+const maxKnockbackSpeed = 5
+const timeKnockback = 0.5
 const fallSpeed = 100
 const maxTimeFreeze = 1
 const damageArea = 0.18
@@ -28,11 +30,11 @@ func _physics_process(delta: float) -> void:
 	
 	# Add the gravity.
 	if not is_on_floor():
-		gravity = fallSpeed * Vector3(0,-1,0)
+		gravity = fallSpeed*Vector3(0,-1,0)
 	else:
 		gravity = Vector3.ZERO
 	
-	if not dead and knockbackSpeed <= 0 and timeFreeze <= 0:
+	if not dead and knockbackSpeed == 0:
 		var playerCoor = player.transform.origin
 		var enemyCoor = transform.origin
 		direction = moveSpeed * (playerCoor - enemyCoor).normalized()
@@ -51,10 +53,7 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	
-	if (position-player.position).length() <= damageArea:
-		player._on_damage(position)
-	
-func collision(collision: Vector3, name: String):
+func collision(collision: Vector3):
 	if (name == "Player" or name == "Bubble") and timeFreeze <= 0:
 		var enemyCoor = transform.origin
 		knockback = enemyCoor - collision
@@ -65,6 +64,19 @@ func collision(collision: Vector3, name: String):
 		timeFreeze = maxTimeFreeze
 		material.albedo_color = Color(0,0,1)
 
+func _on_area_3d_body_exited(body: Node3D) -> void:
+	dead = true
+	timer.start(3)
+
 func _on_timer_timeout() -> void:
 	dead = false
-	position = originalPosition
+	position = Vector3(0.5,0.12,0)
+
+# Mira mi bombita tic tac tic
+func _on_kaboom_timeout() -> void:
+	var explosion = explosionScene.instantiate()
+	dead = true
+	print("Kaboom!!!")
+	explosion.position = position
+	get_node("..").add_child(explosion)
+	queue_free()
