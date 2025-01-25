@@ -10,7 +10,6 @@ const maxCoolDown = 0.25
 var coolDown = 0
 
 func _input(event):
-	print(coolDown)
 	if Input.is_action_pressed("shoot") and coolDown <= 0:
 		coolDown = maxCoolDown
 		var bubble = bubble_scene.instantiate()
