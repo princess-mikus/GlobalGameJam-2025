@@ -9,6 +9,7 @@ const nonChargedScale = 0.08
 const verticalOffset = 0.08
 const maxKnockbackSpeed = 1.5
 const timeKnockback = 0.1
+const damageArea = 5
 
 @onready var bubble_scene = preload("res://scenes/bubble.tscn")
 @onready var bubble_gum_scene = preload("res://scenes/bubble_gum.tscn")
@@ -31,6 +32,7 @@ func _input(event):
 	if Input.is_action_just_released("bubble") and coolDownBubble <= 0 and chargingBubble != null:
 		coolDownBubble = maxCoolDownBubble
 		chargingBubble.direction = pivot.get_global_transform().basis * Vector3(0,0,-1)
+		chargingBubble.explode = scaleBubble >= chargedScale
 		chargingBubble = null
 		timeStart = 0
 	elif Input.is_action_pressed("bubble") and coolDownBubble <= 0 and chargingBubble == null:
@@ -41,6 +43,7 @@ func _input(event):
 		scaleBubble = nonChargedScale
 		chargingBubble.get_child(0).scale = Vector3.ONE*scaleBubble
 		chargingBubble.get_child(1).scale = Vector3.ONE*scaleBubble
+		chargingBubble.get_child(2).scale = damageArea*Vector3.ONE*scaleBubble
 		var material = chargingBubble.get_child(0).get_surface_override_material(0)
 		material.albedo_color = Color(0,0,1)
 		parent.add_child(chargingBubble)
@@ -59,6 +62,7 @@ func _physics_process(delta: float) -> void:
 			scaleBubble += (chargedScale-nonChargedScale)/(chargedElapsed*60.0)
 			chargingBubble.get_child(0).scale = Vector3.ONE*scaleBubble
 			chargingBubble.get_child(1).scale = Vector3.ONE*scaleBubble
+			chargingBubble.get_child(2).scale = damageArea*Vector3.ONE*scaleBubble
 		if (Time.get_ticks_msec()-timeStart)/1000.0 > chargedElapsed:
 			var material = chargingBubble.get_child(0).get_surface_override_material(0)
 			material.albedo_color = Color(1,1,0)

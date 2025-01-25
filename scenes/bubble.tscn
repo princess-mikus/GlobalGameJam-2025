@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dgswkg56uddlm"]
+[gd_scene load_steps=6 format=3 uid="uid://dgswkg56uddlm"]
 
 [ext_resource type="Script" path="res://scripts/bubble.gd" id="1_fbn4u"]
 
@@ -8,6 +8,8 @@
 albedo_color = Color(0, 0, 1, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vdlf3"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xpvbf"]
 
 [node name="Bubble" type="RigidBody3D"]
 collision_layer = 2
@@ -26,3 +28,13 @@ surface_material_override/0 = SubResource("StandardMaterial3D_vlw2c")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0, 0, 0)
 shape = SubResource("SphereShape3D_vdlf3")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_xpvbf")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+[connection signal="body_shape_entered" from="Area3D" to="." method="_on_area_3d_body_shape_entered"]
