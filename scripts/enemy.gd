@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 		var playerCoor = player.transform.origin
 		var enemyCoor = transform.origin
 		direction = moveSpeed * (playerCoor - enemyCoor).normalized()
-		material.albedo_color = originalColor
+		#material.albedo_color = originalColor
 	elif knockbackSpeed > 0:
 		direction = knockbackSpeed * knockback.normalized()
 		knockbackSpeed -= maxKnockbackSpeed/(60*timeKnockback)
@@ -64,7 +64,3 @@ func collision(collision: Vector3, name: String):
 		knockbackSpeed = 0
 		timeFreeze = maxTimeFreeze
 		material.albedo_color = Color(0,0,1)
-
-func _on_timer_timeout() -> void:
-	dead = false
-	position = originalPosition
