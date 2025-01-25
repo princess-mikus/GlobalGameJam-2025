@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://brnkx57g2q4mu"]
+[gd_scene load_steps=6 format=3 uid="uid://brnkx57g2q4mu"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_0gvct"]
 [ext_resource type="Texture2D" uid="uid://birur2h5s5eut" path="res://sprites/PLACEHOLDER_crosshair.png" id="2_3mxbu"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8hdl7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ys3wb"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tob63"]
 
@@ -15,6 +17,7 @@ script = ExtResource("1_0gvct")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00700504, 0.992032, -0.0125644)
 mesh = SubResource("CapsuleMesh_8hdl7")
 skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ys3wb")
 
 [node name="Gravity" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00299, 0)
