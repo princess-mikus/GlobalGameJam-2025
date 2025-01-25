@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-const SPEED = 1.0
+const SPEED = 2.0
 const maxCoolDownBubble = 0.5
 const maxCoolDownBubbleGum = 2.5
 const chargedElapsed = 1
@@ -12,12 +12,14 @@ const timeKnockback = 0.1
 const damageArea = 5
 const gumArea = 3
 
+@onready var sprite = $Sprite3D
 @onready var bubble_scene = preload("res://scenes/bubble.tscn")
 @onready var bubble_gum_scene = preload("res://scenes/bubble_gum.tscn")
 @onready var mesh = $MeshInstance3D
 @onready var material = mesh.get_surface_override_material(0)
 @onready var parent = $".."
 @onready var pivot = $Pivot
+@onready var animation = $AnimationPlayer
 
 var coolDownBubble = 0
 var coolDownBubbleGum = 0
@@ -86,9 +88,11 @@ func _physics_process(delta: float) -> void:
 		var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")	
 		var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		if direction:
+			animation.play("playerRun")
 			velocity.x = direction.x * SPEED
 			velocity.z = direction.z * SPEED
 		else:
+			animation.play("playerIdle")
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			velocity.z = move_toward(velocity.z, 0, SPEED)
 		material.albedo_color = Color(1,1,1)
@@ -111,6 +115,7 @@ func _physics_process(delta: float) -> void:
 	if result:
 		$Crosshair.global_position = result.position
 		$Pivot.look_at(Vector3(result.position.x, 0, result.position.z))
+		sprite.flip_h = position.x - result.position.x >= 0
 
 func	_on_damage(position: Vector3):
 	if knockbackSpeed <= 0:

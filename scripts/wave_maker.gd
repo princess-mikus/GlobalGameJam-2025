@@ -13,7 +13,6 @@ func _ready():
 
 var butget = 5
 var enemysLeft
-var coolDown = 0
 var queue = Array()
 var count = 0
 var roundCount = 1;
@@ -21,12 +20,13 @@ var roundCount = 1;
 const verticalOffset = 0.12
 const maxCoolDown = 3.0
 const groundRadious = 0.7
-const spawnRadio = 0.6
-const spawnLimitation = 0.15
+const spawnRadio = 2.5
+const spawnLimitation = 0.3
 const normalCost = 1
 const explosiveCost = 2
 const slimeSCost = 3
 
+var coolDown = maxCoolDown
 
 func enemyDied(enemy: Node3D) -> void:
 	enemysLeft -= 1
