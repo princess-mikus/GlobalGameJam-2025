@@ -3,10 +3,12 @@ extends CharacterBody3D
 @onready var player = $"../Player"
 @onready var timer = $Timer
 
-var moveSpeed = 20
-var maxKnockbackSpeed = 60
-var timeKnockback = 1
-var fallSpeed = 100
+@onready var mesh = $MeshInstance3D
+
+const moveSpeed = 20
+const maxKnockbackSpeed = 60
+const timeKnockback = 1
+const fallSpeed = 100
 
 var dead = false
 var knockbackSpeed = 0

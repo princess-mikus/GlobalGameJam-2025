@@ -1,6 +1,7 @@
 extends RigidBody3D
 
-var speed = 50
+const speed = 50
+
 var direction = Vector3.ZERO
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

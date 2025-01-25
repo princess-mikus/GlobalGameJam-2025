@@ -1,18 +1,28 @@
 extends CharacterBody3D
 
 const SPEED = 1.0
+const maxCoolDown = 0.25
 
 @onready var bubble_scene = preload("res://scenes/bubble.tscn")
 @onready var parent = $".."
+@onready var pivot = $Pivot
+
+var coolDown = 0
 
 func _input(event):
-	if Input.is_action_pressed("shoot"):
+	print(coolDown)
+	if Input.is_action_pressed("shoot") and coolDown <= 0:
+		coolDown = maxCoolDown
 		var bubble = bubble_scene.instantiate()
-		bubble.transform.origin = global_position
-		bubble.direction = Vector3(1,0,0)
+		bubble.transform.origin = global_position + Vector3(0,0.08,0)
+		bubble.direction = pivot.get_global_transform().basis * Vector3(0,0,-1)
 		parent.add_child(bubble)
 		
 func _physics_process(delta: float) -> void:
+	
+	if coolDown > 0:
+		coolDown = coolDown-(1.0/60)
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
