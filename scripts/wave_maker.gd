@@ -13,7 +13,6 @@ func _ready():
 
 var butget = 5
 var enemysLeft
-const maxCoolDown = 3.0
 var coolDown = 0
 var queue = Array()
 var count = 0
@@ -27,9 +26,7 @@ const spawnLimitation = 0.15
 const normalCost = 1
 const explosiveCost = 2
 const slimeSCost = 3
-const verticalOffset = 0.12
 
-var count = 0
 
 func enemyDied(enemy: Node3D) -> void:
 	enemysLeft -= 1
@@ -47,8 +44,8 @@ func roundEnd():
 func spawn():
 	if (queue.is_empty()):
 		return;
-	var choice = [enemy_scene1, enemy_scene2]
-	var choice_name = ["Enemy","Bomb_Enemy"]
+	var choice = [enemy_scene1, enemy_scene2, enemy_scene3]
+	var choice_name = ["Enemy","Bomb_Enemy", "Slime_Enemy"]
 	var rand = Vector3(randf_range(-spawnRadio, spawnRadio),player.position.y,randf_range(-spawnRadio, spawnRadio))
 	while ((rand-player.position).length() < spawnLimitation):
 		rand = Vector3(randf_range(-spawnRadio, spawnRadio),player.position.y,randf_range(-spawnRadio, spawnRadio))
@@ -77,7 +74,7 @@ func make_queue():
 	var last = normalCost
 	var localButget = butget
 	while localButget > 0:
-		var next = randi() % 2 + 1
+		var next = randi() % 3 + 1
 		if (!(last == explosiveCost && next == explosiveCost)
 		&& !(last == slimeSCost && next == slimeSCost)
 		&& (next <= localButget)):
