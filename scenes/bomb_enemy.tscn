@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://b7sssgxvpba83"]
+[gd_scene load_steps=9 format=3 uid="uid://3yt3ebdew1jm"]
 
 [ext_resource type="Script" path="res://scripts/bomb_enemy.gd" id="1_kx3n1"]
-[ext_resource type="Material" uid="uid://bhqsipjp6txyo" path="res://Butano_placeholder.tres" id="2_meykp"]
-[ext_resource type="Material" uid="uid://b6yp3tetotxhv" path="res://Butano_exploder_placeholder.tres" id="3_wui53"]
+[ext_resource type="Material" path="res://Butano_placeholder.tres" id="2_meykp"]
+[ext_resource type="Material" path="res://Butano_exploder_placeholder.tres" id="3_wui53"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_qsgex"]
 
@@ -32,13 +32,14 @@ _data = {
 "tic_tac": SubResource("Animation_bm8mo")
 }
 
-[node name="Bomb" type="CharacterBody3D"]
+
+[node name="Bomb_Enemy" type="CharacterBody3D"]
+
 transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0.12, 0)
 collision_mask = 3
 script = ExtResource("1_kx3n1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-material_override = ExtResource("2_meykp")
 mesh = SubResource("SphereMesh_qsgex")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("2_meykp")
