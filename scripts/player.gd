@@ -10,6 +10,7 @@ const verticalOffset = 0.08
 const maxKnockbackSpeed = 1.5
 const timeKnockback = 0.1
 const damageArea = 5
+const gumArea = 3
 
 @onready var bubble_scene = preload("res://scenes/bubble.tscn")
 @onready var bubble_gum_scene = preload("res://scenes/bubble_gum.tscn")
@@ -52,6 +53,7 @@ func _input(event):
 		var bubble_gum = bubble_gum_scene.instantiate()
 		bubble_gum.transform.origin = global_position + Vector3(0,verticalOffset,0)
 		bubble_gum.direction = pivot.get_global_transform().basis * Vector3(0,0,-1)
+		bubble_gum.get_child(2).scale = gumArea*Vector3.ONE*nonChargedScale
 		parent.add_child(bubble_gum)
 		
 func _physics_process(delta: float) -> void:
