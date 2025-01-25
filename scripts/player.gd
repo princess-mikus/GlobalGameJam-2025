@@ -94,12 +94,6 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		if collision.get_collider().name == "Enemy":
-			collision.get_collider().collision(collision.get_position())
-
 	var camera = get_node("../Camera3D")
 	var viewport := get_viewport()
 	var mousePos = viewport.get_mouse_position()
