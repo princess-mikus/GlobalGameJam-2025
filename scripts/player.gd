@@ -2,15 +2,8 @@ extends CharacterBody3D
 
 const SPEED = 1.0
 
-const BULLET_SPEED = 5.0
-
-func _ready() -> void:
-	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	pass
-
-@onready var bullet = preload("res://scenes/bullet.tscn")
-
-func _physics_process(delta: float) -> void:
+@onready var bubble_scene = preload("res://scenes/bubble.tscn")
+@onready var parent = $".."
 
 func _input(event):
 	if Input.is_action_pressed("shoot"):
@@ -18,7 +11,6 @@ func _input(event):
 		bubble.transform.origin = global_position
 		bubble.direction = Vector3(1,0,0)
 		parent.add_child(bubble)
-		
 		
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -38,6 +30,10 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		if collision.get_collider().name == "Enemy":
+			collision.get_collider().collision(collision.get_position())
 
 	var camera = get_node("../Camera3D")
 	var viewport := get_viewport()
@@ -49,13 +45,3 @@ func _physics_process(delta: float) -> void:
 	var result = spaceState.intersect_ray(query)
 	if result:
 		$Pivot.look_at(Vector3(result.position.x, 0, result.position.z))
-
-func _input(event):
-	pass
-
-	
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		if collision.get_collider().name == "Enemy":
-			collision.get_collider().collision(collision.get_position())
-

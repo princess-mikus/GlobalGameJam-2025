@@ -8,6 +8,7 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tob63"]
 
 [node name="Player" type="CharacterBody3D"]
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0)
 script = ExtResource("1_0gvct")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -23,7 +24,6 @@ skeleton = NodePath("../..")
 
 [node name="Gravity" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00299, 0)
-
 shape = SubResource("CapsuleShape3D_tob63")
 
 [node name="Pivot" type="Node3D" parent="."]

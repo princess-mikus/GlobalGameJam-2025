@@ -13,7 +13,6 @@
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1.00119, -0.00923129, 1.83476e-09, 0.0061092, 0.877672, 0.731931, -0.00519713, -0.74664, 0.860381, 0.03613, 1.32463, 1.62772)
-
 projection = 1
 fov = 116.76
 size = 1.80756
@@ -44,4 +43,3 @@ transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 shape = SubResource("CylinderShape3D_k6ckx")
 
 [connection signal="body_exited" from="PlayZone" to="Enemy" method="_on_area_3d_body_exited"]
-
