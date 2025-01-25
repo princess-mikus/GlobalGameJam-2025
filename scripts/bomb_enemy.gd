@@ -79,5 +79,6 @@ func _on_kaboom_timeout() -> void:
 	var explosion = explosionScene.instantiate()
 	dead = true
 	explosion.position = position
+	get_node("../waveMaker").enemyDied(self)
 	get_node("..").add_child(explosion)
 	queue_free()

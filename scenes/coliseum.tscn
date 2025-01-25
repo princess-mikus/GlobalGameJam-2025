@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/play_zone.gd" id="2_i3e4t"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_3cxyh"]
 [ext_resource type="PackedScene" uid="uid://brnkx57g2q4mu" path="res://scenes/player.tscn" id="1_6m13s"]
+[ext_resource type="Script" path="res://scripts/play_zone.gd" id="2_0cnod"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="1_rtuli"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="2_aaclb"]
 
@@ -28,6 +29,14 @@ transform = Transform3D(1, 0, 0, 0, 0.950905, 0.309482, 0, -0.309482, 0.950905, 
 projection = 1
 fov = 116.76
 size = 1.80756
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Camera3D"]
+offset_right = 1152.0
+offset_bottom = 137.0
+bbcode_enabled = true
+text = "[font_size=100][center][font=res://resources/font.ttf] Wave 1"
+fit_content = true
+scroll_active = false
 
 [node name="PhantomCameraHost" type="Node" parent="Camera3D"]
 process_priority = 300
