@@ -13,6 +13,7 @@ func _ready():
 
 var butget = 5
 var enemysLeft
+const maxCoolDown = 3.0
 var coolDown = 0
 var queue = Array()
 var count = 0
@@ -26,7 +27,9 @@ const spawnLimitation = 0.15
 const normalCost = 1
 const explosiveCost = 2
 const slimeSCost = 3
+const verticalOffset = 0.12
 
+var count = 0
 
 func enemyDied(enemy: Node3D) -> void:
 	enemysLeft -= 1
@@ -50,6 +53,7 @@ func spawn():
 	while ((rand-player.position).length() < spawnLimitation):
 		rand = Vector3(randf_range(-spawnRadio, spawnRadio),player.position.y,randf_range(-spawnRadio, spawnRadio))
 	print(queue, choice)
+
 	var enemy = choice[queue[0] - 1].instantiate()
 	enemy.name = choice_name[queue[0] - 1] + str(count)
 	queue.remove_at(0)
@@ -59,7 +63,6 @@ func spawn():
 	parent.add_child(enemy)
 
 func _physics_process(delta: float) -> void:
-	
 	if coolDown > 0:
 		coolDown = coolDown-(1.0/60)
 	if coolDown <= 0:
