@@ -33,9 +33,3 @@ skeleton = NodePath("../..")
 [node name="Crosshair" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 texture = ExtResource("2_3mxbu")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(8.33302, -0.0727211, 0, 0.0412942, 4.73185, 6.85947, -0.0598594, -6.85921, 4.73203, 0, 8.3221, -1.76807)
-projection = 1
-fov = 116.76
-size = 1.80756

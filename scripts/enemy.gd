@@ -11,15 +11,15 @@ extends CharacterBody3D
 const moveSpeed = 20
 const maxKnockbackSpeed = 60
 const timeKnockback = 1
-const maxTimeFreeze = 1
 const fallSpeed = 100
+const maxTimeFreeze = 1
 const damageArea = 0.18
 
 var dead = false
 var knockbackSpeed = 0
 var knockback = Vector3.ZERO
-
 var timeFreeze = 0
+
 
 func _physics_process(delta: float) -> void:
 	
@@ -52,9 +52,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	if (position-player.position).length() <= damageArea:
-		player.damage(position)
-	
-	
+		player._on_damage(position)
 	
 func collision(collision: Vector3, name: String):
 	if (name == "Player" or name == "Bubble") and timeFreeze <= 0:

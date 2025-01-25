@@ -16,4 +16,4 @@ func _on_duration_timeout() -> void:
 
 func _on_body_in_area(body):
 	if body.name == "Player":
-		body._on_damage()
+		body._on_damage(position)
