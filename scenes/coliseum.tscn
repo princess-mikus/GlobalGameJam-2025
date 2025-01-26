@@ -63,6 +63,8 @@ script = ExtResource("2_i3e4t")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayZone"]
 shape = SubResource("CylinderShape3D_k6ckx")
 
+[node name="Timer" type="Timer" parent="PlayZone"]
+
 [node name="waveMaker" type="Node" parent="."]
 script = ExtResource("3_mt105")
 
@@ -76,3 +78,4 @@ tween_resource = SubResource("Resource_dmwmr")
 follow_offset = Vector3(0, 0.895, 1.975)
 
 [connection signal="body_exited" from="PlayZone" to="PlayZone" method="_on_body_exited"]
+[connection signal="timeout" from="PlayZone/Timer" to="PlayZone" method="_on_timer_timeout"]
