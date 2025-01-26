@@ -24,5 +24,8 @@ func _on_duration_timeout() -> void:
 	queue_free()
 
 func _on_body_in_area(body):
+	print(body)
 	if body.name == "Player":
 		body._on_damage(position,true)
+	elif body.name.contains("Enemy"):
+		body.collision(position, name)

@@ -58,7 +58,7 @@ func _physics_process(delta: float) -> void:
 		player._on_damage(position,false)
 	
 func collision(collision: Vector3, name: String):
-	if name == "Bubble" and timeFreeze <= 0:
+	if (name == "Explosion" or name == "Bubble") and timeFreeze <= 0:
 		var enemyCoor = transform.origin
 		knockback = enemyCoor - collision
 		knockbackSpeed = maxKnockbackSpeed
