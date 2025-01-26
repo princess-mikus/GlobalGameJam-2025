@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ll1tuiwwt86g"
+path="res://.godot/imported/PASOS (fx).wav-0a20e64e68161a64b402571c167a4bf6.sample"
+
+[deps]
+
+source_file="res://resources/PASOS (fx).wav"
+dest_files=["res://.godot/imported/PASOS (fx).wav-0a20e64e68161a64b402571c167a4bf6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

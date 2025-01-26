@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8tn0o1orpsio"]
+[gd_scene load_steps=6 format=3 uid="uid://c8tn0o1orpsio"]
 
 [ext_resource type="Script" path="res://scripts/menus/backButton.gd" id="1_eegfq"]
 [ext_resource type="Script" path="res://scripts/menus/brigth_slide.gd" id="1_r5qa2"]
 [ext_resource type="Script" path="res://scripts/menus/fullscreen_check.gd" id="2_2oqcf"]
+[ext_resource type="Script" path="res://scripts/menus/volumen_slide.gd" id="2_pjlnb"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hdsop"]
 load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
@@ -11,7 +12,7 @@ load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.cte
 position = Vector2(580, 340)
 
 [node name="mainBackground" type="Sprite2D" parent="."]
-modulate = Color(100, 0, 0, 1)
+modulate = Color(128.498, 1, 1, 1)
 scale = Vector2(7000, 3888.82)
 texture = SubResource("CompressedTexture2D_hdsop")
 
@@ -40,6 +41,7 @@ autowrap_mode = 0
 metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="back"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 91.0
 offset_right = 99.0
@@ -97,6 +99,8 @@ offset_left = -296.0
 offset_top = -69.0
 offset_right = 304.0
 offset_bottom = -53.0
+max_value = 80.0
+script = ExtResource("2_pjlnb")
 metadata/_edit_use_anchors_ = true
 
 [node name="brigthSlide" type="HSlider" parent="."]
@@ -130,5 +134,6 @@ script = ExtResource("2_2oqcf")
 metadata/_edit_use_anchors_ = true
 
 [connection signal="button_up" from="back/Button" to="back/Button" method="_on_button_up"]
+[connection signal="value_changed" from="volumenSlide" to="volumenSlide" method="_on_value_changed"]
 [connection signal="value_changed" from="brigthSlide" to="brigthSlide" method="_on_value_changed"]
 [connection signal="button_up" from="fullscreenCheck" to="fullscreenCheck" method="_on_button_up"]
