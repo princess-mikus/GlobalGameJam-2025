@@ -7,9 +7,8 @@
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hdsop"]
 load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
 
-[node name="settings" type="CanvasLayer"]
-offset = Vector2(580, 340)
-transform = Transform2D(1, 0, 0, 1, 580, 340)
+[node name="settings" type="Node2D"]
+position = Vector2(580, 340)
 
 [node name="mainBackground" type="Sprite2D" parent="."]
 modulate = Color(100, 0, 0, 1)
