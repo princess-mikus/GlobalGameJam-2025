@@ -56,8 +56,7 @@ offset_top = -20.0
 offset_right = 100.0
 grow_vertical = 0
 bbcode_enabled = true
-text = "[center][font=resources/font2.ttf][font_size=100
-][color=white]credits"
+text = "[font_size=100][font=resources/font4.ttf][center][color=#c7c3b9]CREDITS"
 
 [node name="creditsButtom" type="LinkButton" parent="mainMenu/credits"]
 modulate = Color(1, 1, 1, 0)
@@ -79,16 +78,16 @@ metadata/_edit_use_anchors_ = true
 [node name="play" type="RichTextLabel" parent="mainMenu"]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.398
-anchor_right = 0.314
-anchor_bottom = 0.602
+anchor_left = -0.000925926
+anchor_top = 0.364286
+anchor_right = 0.313074
+anchor_bottom = 0.568286
 offset_top = 70.0
 offset_right = 250.0
 offset_bottom = 70.0
 grow_vertical = 2
 bbcode_enabled = true
-text = "[center][font=resources/font2.ttf][font_size=100
-][color=white]play
+text = "[font_size=100][font=resources/font4.ttf][center][color=#c7c3b9]PLAY
 "
 metadata/_edit_use_anchors_ = true
 
@@ -115,14 +114,15 @@ anchor_left = 0.602
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.691
-offset_left = -100.16
-offset_bottom = 23.04
+offset_left = -98.16
+offset_top = -16.0
+offset_right = 2.0
+offset_bottom = 7.04001
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 4
 bbcode_enabled = true
-text = "[center][font=resources/font2.ttf][font_size=100
-][color=white]settings
+text = "[font_size=100][font=resources/font4.ttf][center][color=#c7c3b9]SETTINGS
 "
 
 [node name="settingButtom" type="Button" parent="mainMenu/settings"]
@@ -153,8 +153,7 @@ offset_top = -20.0
 grow_horizontal = 0
 grow_vertical = 0
 bbcode_enabled = true
-text = "[center][font=resources/font2.ttf][font_size=100
-][color=white]quit
+text = "[font_size=100][font=resources/font4.ttf][center][color=#c7c3b9]QUIT
 "
 
 [node name="exitButtom" type="Button" parent="mainMenu/quit"]
