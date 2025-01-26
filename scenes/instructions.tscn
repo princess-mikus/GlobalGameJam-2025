@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=3 uid="uid://fl8rtfw417xi"]
+
+[ext_resource type="Texture2D" uid="uid://b8ov7737oq4sr" path="res://sprites/instrucciones.jpg" id="1_mtwai"]
+[ext_resource type="FontFile" uid="uid://qs0y8aa38ega" path="res://resources/font4.ttf" id="2_k8ri6"]
+[ext_resource type="Script" path="res://scenes/start.gd" id="2_th21q"]
+
+[node name="Instructions" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(-165, -78)
+scale = Vector2(0.690104, 0.671296)
+texture = ExtResource("1_mtwai")
+centered = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 214.0
+offset_top = 8.0
+offset_right = 986.0
+offset_bottom = 182.0
+theme_override_font_sizes/normal_font_size = 20
+text = "BUBBLES! BUBBLES! BUBBLES!
+
+When you click the left mouse button, you'll shoot bubbles that knock out enemies!
+When an enemy falls from the arena, they'll die.
+If you hold the button, your attack will push multiple enemies!"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+offset_left = 216.0
+offset_top = 191.0
+offset_right = 983.0
+offset_bottom = 330.0
+theme_override_font_sizes/normal_font_size = 20
+text = " BUBBLEGUMS!!!!
+
+When you click the right mouse button, you'll shoot bubblegums that will stick the enemies to the ground! It may be useful for some enemies..."
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="."]
+offset_left = 207.0
+offset_top = 360.0
+offset_right = 1131.0
+offset_bottom = 496.0
+theme_override_font_sizes/normal_font_size = 20
+text = "DODGE THE ENEMIES!
+
+              You move the player with the WASD keys. 
+              Remember if enemies get you, you'll first lose your shield, and after that YOU'LL DIE!"
+autowrap_mode = 0
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = -1
+offset_left = 307.0
+offset_top = 528.0
+offset_right = 889.0
+offset_bottom = 647.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_k8ri6")
+theme_override_font_sizes/font_size = 58
+text = "LET'S GET INTO IT"
+script = ExtResource("2_th21q")
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dd7xyrk3h6ey4"]
+[gd_scene load_steps=27 format=3 uid="uid://dd7xyrk3h6ey4"]
 
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_3cxyh"]
 [ext_resource type="PackedScene" uid="uid://brnkx57g2q4mu" path="res://scenes/player.tscn" id="1_6m13s"]
@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bs17qwxrkjkpw" path="res://sprites/IMG_3116.png" id="7_lfk4g"]
 [ext_resource type="Texture2D" uid="uid://ds7o0fwxdxj6" path="res://sprites/IMG_3120.png" id="8_725iq"]
 [ext_resource type="Texture2D" uid="uid://66wqtbd7uam0" path="res://sprites/New Project.png" id="8_dtuie"]
-[ext_resource type="Script" path="res://scenes/background.gd" id="9_3bd78"]
+[ext_resource type="Script" path="res://sprites/background.gd" id="9_3bd78"]
 [ext_resource type="AudioStream" uid="uid://bgwjv2cvxxqvt" path="res://resources/pompa cargando.mp3" id="9_x6yp5"]
 [ext_resource type="AudioStream" uid="uid://dyi3q8sda6s2m" path="res://resources/pompa impacto cargado.mp3" id="10_i0fqi"]
 [ext_resource type="AudioStream" uid="uid://fmk357ph8mkh" path="res://resources/pompa impacto 1.mp3" id="11_rpxem"]
@@ -18,6 +18,9 @@
 [ext_resource type="AudioStream" uid="uid://c31smwhyg8cxt" path="res://resources/EXPLOSION (fx).wav" id="14_jgarb"]
 [ext_resource type="AudioStream" uid="uid://bo77hyx0gywni" path="res://resources/PÚBLICO (fx).wav" id="15_tstho"]
 [ext_resource type="AudioStream" uid="uid://ceyeopqfse05m" path="res://resources/grito-101472.mp3" id="16_5fppx"]
+[ext_resource type="AudioStream" uid="uid://diy8ehx1cukho" path="res://resources/INTRO.mp3" id="19_kcqvl"]
+[ext_resource type="AudioStream" uid="uid://bji7vt2v3toh7" path="res://resources/LOOP.mp3" id="20_46egj"]
+[ext_resource type="Script" path="res://sprites/audio_stream_player.gd" id="20_lg6kd"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ftxh5"]
 
@@ -118,9 +121,11 @@ script = ExtResource("9_3bd78")
 
 [node name="BubbleCharge" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_x6yp5")
+volume_db = -15.0
 
 [node name="BubbleExplosion" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_i0fqi")
+volume_db = -15.0
 
 [node name="BubbleHit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_rpxem")
@@ -130,17 +135,33 @@ stream = ExtResource("12_2kscs")
 
 [node name="BubbleGumHit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_wcaxp")
+volume_db = -15.0
 
 [node name="Explosion" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_jgarb")
+volume_db = -15.0
 
 [node name="Hit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_tstho")
+volume_db = -30.0
 
 [node name="EnemyDeath" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_5fppx")
+volume_db = -30.0
 pitch_scale = 2.0
+
+[node name="IntroMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_kcqvl")
+volume_db = -25.0
+autoplay = true
+
+[node name="LoopMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_46egj")
+volume_db = -35.0
+parameters/looping = true
+script = ExtResource("20_lg6kd")
 
 [connection signal="body_exited" from="PlayZone" to="PlayZone" method="_on_body_exited"]
 [connection signal="timeout" from="PlayZone/Timer" to="PlayZone" method="_on_timer_timeout"]
 [connection signal="timeout" from="waveMaker/Timer" to="waveMaker" method="_on_timer_timeout"]
+[connection signal="finished" from="IntroMusic" to="LoopMusic" method="_on_intro_music_finished"]

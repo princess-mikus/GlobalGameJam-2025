@@ -31,6 +31,7 @@ fit_content = true
 
 [node name="BoohAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_5ocvc")
+volume_db = -30.0
 autoplay = true
 
 [node name="PLAYAGIN" type="RichTextLabel" parent="."]
