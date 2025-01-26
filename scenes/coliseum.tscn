@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dd7xyrk3h6ey4"]
+[gd_scene load_steps=24 format=3 uid="uid://dd7xyrk3h6ey4"]
 
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_3cxyh"]
 [ext_resource type="PackedScene" uid="uid://brnkx57g2q4mu" path="res://scenes/player.tscn" id="1_6m13s"]
@@ -7,7 +7,9 @@
 [ext_resource type="Script" path="res://scripts/play_zone.gd" id="2_i3e4t"]
 [ext_resource type="Script" path="res://scripts/wave_maker.gd" id="3_mt105"]
 [ext_resource type="Texture2D" uid="uid://bs17qwxrkjkpw" path="res://sprites/IMG_3116.png" id="7_lfk4g"]
+[ext_resource type="Texture2D" uid="uid://ds7o0fwxdxj6" path="res://sprites/IMG_3120.png" id="8_725iq"]
 [ext_resource type="Texture2D" uid="uid://66wqtbd7uam0" path="res://sprites/New Project.png" id="8_dtuie"]
+[ext_resource type="Script" path="res://scenes/background.gd" id="9_3bd78"]
 [ext_resource type="AudioStream" uid="uid://bgwjv2cvxxqvt" path="res://resources/pompa cargando.mp3" id="9_x6yp5"]
 [ext_resource type="AudioStream" uid="uid://dyi3q8sda6s2m" path="res://resources/pompa impacto cargado.mp3" id="10_i0fqi"]
 [ext_resource type="AudioStream" uid="uid://fmk357ph8mkh" path="res://resources/pompa impacto 1.mp3" id="11_rpxem"]
@@ -103,8 +105,16 @@ text = "<null>"
 scroll_active = false
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(11391.3, 0, 0, 0, 11676.1, 0, 0, 0, 1423.92, 0, 0, -2482.28)
+transform = Transform3D(0.264769, 0, 0, 0, 0.144934, 0.0112485, 0, -0.092237, 0.0176749, 0.00119066, -0.0338612, -2.42917)
+sorting_offset = -10.0
+texture = ExtResource("8_725iq")
+script = ExtResource("9_3bd78")
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(63.8251, 0, 0, 0, 34.9377, 2.71155, 0, -22.2346, 4.26071, -0.288841, -0.642381, -3.99894)
+sorting_offset = -400.0
 texture = ExtResource("8_dtuie")
+script = ExtResource("9_3bd78")
 
 [node name="BubbleCharge" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_x6yp5")
