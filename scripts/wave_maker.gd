@@ -51,6 +51,8 @@ func roundStart():
 		label.text = "[font_size=100][color=red][center][font=res://resources/font3.otf] Wave " + str(roundCount)
 	else:
 		label.text = "[font_size=100][center][font=res://resources/font3.otf] Wave " + str(roundCount)
+	player.shield = true
+	player.get_child(0).visible = true
 	timer.start(4)
 
 func roundEnd():
