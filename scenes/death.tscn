@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3 uid="uid://r45ml8tohqxq"]
+
+[ext_resource type="Script" path="res://scenes/death.gd" id="1_1myjr"]
+[ext_resource type="Texture2D" uid="uid://dfs6ke1r16qj5" path="res://icon.svg" id="1_xshot"]
+
+[node name="Death" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_1myjr")
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(29.5234, 17.7266)
+texture = ExtResource("1_xshot")
+metadata/_edit_lock_ = true
+
+[node name="PlayAgain" type="Button" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 60.0
+offset_top = 460.0
+offset_right = 508.0
+offset_bottom = 556.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 64
+text = "PLAY AGNYAN"
+
+[node name="Menu" type="Button" parent="."]
+offset_left = 700.0
+offset_top = 460.0
+offset_right = 1088.0
+offset_bottom = 556.0
+theme_override_font_sizes/font_size = 64
+text = "MAIN MENU"
+metadata/_edit_use_anchors_ = true
+
+[node name="DeathText" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 75.0
+offset_right = 1072.0
+offset_bottom = 374.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[font_size=128][center]YOU'VE MET A TERRIBLE FATE"
+fit_content = true
+
+[connection signal="button_down" from="PlayAgain" to="." method="_on_play_again_button"]
+[connection signal="button_down" from="Menu" to="." method="_on_menu_button"]
