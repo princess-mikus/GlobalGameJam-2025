@@ -3,11 +3,14 @@ extends RigidBody3D
 const speed = 150
 const verticalOffset = 0.16
 
+@onready var bubble_explosion_audio = $"../BubbleExplosion"
+@onready var bubble_hit_audio = $"../BubbleHit"
 @onready var bubble_explosion = preload("res://scenes/bubble_explotion.tscn")
 @onready var parent = $".."
 
 var direction = Vector3.ZERO
 var explode = false
+var holded = true
 
 var enemies = {}
 
@@ -16,16 +19,23 @@ func _physics_process(delta: float) -> void:
 	
 	linear_velocity = speed  *  delta * direction.normalized()
 	
-	if not explode:
-		for node in get_colliding_bodies():
-			if node.name.contains("Enemy"):
-				node.collision(position,"Bubble")
-				queue_free()
-	else:
-		explosion()
+	if not holded:
+		if not explode:
+			if get_colliding_bodies().size() > 0:
+				var flag = false
+				for node in get_colliding_bodies():
+					if node.name.contains("Enemy"):
+						node.collision(position,"Bubble")
+						flag = true
+				if flag:
+					bubble_hit_audio.play()
+					queue_free()
+		else:
+			explosion()
 					
 func explosion():
 	if get_colliding_bodies().size() > 0:
+			bubble_explosion_audio.play()
 			var flag = false
 			for key in enemies:
 				var node = enemies[key]

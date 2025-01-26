@@ -3,6 +3,8 @@ extends Area3D
 const maxSize = 1
 const explosionTime = 0.1
 
+@onready var explosionAudio = $"../Explosion"
+
 @onready var sprite = $Sprite3D
 @onready var originalScale = sprite.transform.basis.get_scale()
 
@@ -13,6 +15,7 @@ func _ready() -> void:
 	#scale = Vector3(1, 1, 1)
 	sprite.scale = Vector3(0,0,0)
 	body_entered.connect(_on_body_in_area)
+	explosionAudio.play()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:

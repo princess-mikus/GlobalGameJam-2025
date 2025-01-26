@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://uswnmc3vpg15"
+path="res://.godot/imported/IMPACTO CHICLE (fx).wav-cb605036764c86c0d7c57ef585c4c4ab.sample"
+
+[deps]
+
+source_file="res://resources/IMPACTO CHICLE (fx).wav"
+dest_files=["res://.godot/imported/IMPACTO CHICLE (fx).wav-cb605036764c86c0d7c57ef585c4c4ab.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

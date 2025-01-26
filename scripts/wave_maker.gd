@@ -1,6 +1,7 @@
 extends Node
 
 func _ready():
+	label.text = "[font_size=100][center][font=res://resources/font3.otf] Wave "
 	randomize()
 	roundStart()
 
@@ -10,12 +11,16 @@ func _ready():
 
 @onready var parent = $".."
 @onready var player = $"../Player"
+@onready var label = $"../CanvasLayer/RichTextLabel"
+@onready var loop = $loop
+@onready var timer = $Timer
+@onready var tween_out = get_tree().create_tween()
 
 var butget = 5
 var enemysLeft
 var queue = Array()
 var count = 0
-var roundCount = 1;
+var roundCount = 0
 
 const verticalOffset = 0.12
 const maxCoolDown = 3.0
@@ -25,21 +30,28 @@ const spawnLimitation = 0.3
 const normalCost = 1
 const explosiveCost = 2
 const slimeSCost = 3
+const transition_duration = 4.00
 
 var coolDown = maxCoolDown
+var roundStarted = false
 
 func slimeDivided():
 	enemysLeft += 2
 
 func enemyDied(enemy: Node3D) -> void:
 	enemysLeft -= 1
+	print(enemysLeft)
+
+func _on_timer_timeout() -> void:
+	label.text = "";
+	make_queue()
 
 func roundStart():
-	var label = $"../CanvasLayer/RichTextLabel"
-	label.text = "[font_size=100][center][font=res://resources/font2.ttf] Wave " + str(roundCount)
-	player.shield = true
-	player.get_node("Shield").visible = true
-	make_queue()
+	if roundCount % 10 == 0:
+		label.text = "[font_size=100][color=red][center][font=res://resources/font3.otf] Wave " + str(roundCount)
+	else:
+		label.text = "[font_size=100][center][font=res://resources/font3.otf] Wave " + str(roundCount)
+	timer.start(4)
 
 func roundEnd():
 	roundCount += 1
@@ -63,13 +75,13 @@ func spawn():
 
 func _physics_process(delta: float) -> void:
 	if coolDown > 0:
-		coolDown = coolDown-(1.0/60)
+		coolDown -= (1.0/60)
 	if coolDown <= 0:
 		coolDown = maxCoolDown
 		spawn()
-	if enemysLeft == 0:
+	if enemysLeft == 0 and roundStarted == false:
+		roundStarted = true
 		roundEnd()
-	
 
 func make_queue():
 	queue.clear()
@@ -83,5 +95,6 @@ func make_queue():
 			queue.append(next)
 			last = next
 			localButget -= next
-	butget = floor(butget * 1.2)
+	butget = floorf(butget * 1.2)
 	enemysLeft = queue.size();
+	roundStarted = false
