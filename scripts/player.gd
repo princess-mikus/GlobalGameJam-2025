@@ -22,8 +22,11 @@ const gumArea = 10
 @onready var parent = $".."
 @onready var pivot = $Pivot
 @onready var animation = $AnimationPlayer
-var scaleOriginal
 
+@onready var SoundCharge = $"../charge"
+@onready var Soundrecharge = $"../recharge"
+
+var scaleOriginal
 var coolDownBubble = 0
 var coolDownBubbleGum = 0
 
@@ -40,6 +43,7 @@ var invulnerableTime = 2.05
 
 func _input(event):
 	if Input.is_action_just_released("bubble") and coolDownBubble <= 0 and chargingBubble != null:
+		SoundCharge.stop()
 		coolDownBubble = maxCoolDownBubble
 		chargingBubble.direction = pivot.get_global_transform().basis * Vector3(0,0,-1)
 		chargingBubble.explode = scaleBubble >= chargedScale
@@ -66,7 +70,8 @@ func _input(event):
 		bubble_gum.get_child(1).scale = Vector3.ONE*nonChargedScale
 		bubble_gum.get_child(2).scale = gumArea*Vector3.ONE*nonChargedScale
 		parent.add_child(bubble_gum)
-		
+		Soundrecharge.play()
+
 func _physics_process(delta: float) -> void:
 	
 	if chargingBubble != null:
@@ -77,6 +82,8 @@ func _physics_process(delta: float) -> void:
 		chargingBubble.get_child(1).scale = Vector3.ONE*scaleBubble
 		chargingBubble.get_child(2).scale = damageArea*Vector3.ONE*scaleBubble
 		#if (Time.get_ticks_msec()-timeStart)/1000.0 > chargedElapsed:
+	if timeStart > 0 && (Time.get_ticks_msec() - timeStart)/1000.0 > 0.1:
+		SoundCharge.play(1.4); 
 		
 	if coolDownBubble > 0:
 		coolDownBubble -= (1.0/60)
@@ -92,7 +99,7 @@ func _physics_process(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	
 	if knockbackSpeed <= 0:
-		var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")	
+		var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 		var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		if direction:
 			if not invulnerable:
