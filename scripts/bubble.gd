@@ -1,6 +1,6 @@
 extends RigidBody3D
 
-const speed = 150
+const speed = 50
 
 var direction = Vector3.ZERO
 var explode = false

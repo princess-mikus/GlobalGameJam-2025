@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://dgswkg56uddlm"]
+[gd_scene load_steps=6 format=3 uid="uid://dgswkg56uddlm"]
 
 [ext_resource type="Script" path="res://scripts/bubble.gd" id="1_fbn4u"]
-[ext_resource type="Texture2D" uid="uid://dawgxl44jfm6e" path="res://sprites/bubbleProjectile.png" id="2_5c1bh"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_1je0n"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vlw2c"]
+albedo_color = Color(0, 0, 1, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vdlf3"]
 
@@ -15,10 +19,11 @@ contact_monitor = true
 max_contacts_reported = 10
 script = ExtResource("1_fbn4u")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(0.11, 0, 0, 0, 0.11, 0, 0, 0, 0.11, 0, 0, 0)
-modulate = Color(0, 1, 1, 1)
-texture = ExtResource("2_5c1bh")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0, 0, 0)
+layers = 2
+mesh = SubResource("SphereMesh_1je0n")
+surface_material_override/0 = SubResource("StandardMaterial3D_vlw2c")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0, 0, 0)

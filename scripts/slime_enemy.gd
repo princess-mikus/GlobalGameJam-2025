@@ -4,7 +4,6 @@ extends CharacterBody3D
 @onready var player = $"../Player"
 @onready var timer = $Timer
 
-@onready var wave = $"../waveMaker"
 @onready var mesh = $MeshInstance3D
 @onready var material = mesh.get_surface_override_material(0)
 @onready var originalColor = material.albedo_color
@@ -18,7 +17,7 @@ const maxKnockbackSpeed = 40
 const timeKnockback = 1
 const fallSpeed = 100
 const maxTimeFreeze = 2
-const damageArea = 0.4
+const damageArea = 0.25
 const probDivide = 0.5
 const verticalOffset = 0.08
 
@@ -47,6 +46,7 @@ func _physics_process(delta: float) -> void:
 		direction = moveSpeed * (playerCoor - enemyCoor).normalized()
 		#material.albedo_color = originalColor
 	elif knockbackSpeed > 0:
+		print(knockbackSpeed)
 		direction = knockbackSpeed * knockback.normalized()
 		knockbackSpeed -= maxKnockbackSpeed/(60.0*timeKnockback)
 	elif timeFreeze > 0:
@@ -77,6 +77,10 @@ func collision(collision: Vector3, name: String):
 		timeFreeze = maxTimeFreeze
 		#material.albedo_color = Color(0,0,1)
 
+func _on_timer_timeout() -> void:
+	dead = false
+	queue_free()
+
 func divide():
 	var slimes = [slimelingScene.instantiate(),slimelingScene.instantiate(),slimelingScene.instantiate()]
 	var offset = [Vector3(0.1,0,0),Vector3(0,0,0.1),Vector3(-0.1,0,0)]
@@ -84,5 +88,4 @@ func divide():
 		slimes[i].transform.origin = global_position + Vector3(0,verticalOffset,0) + offset[i]
 		slimes[i].name = name + "_" + str(i)
 		parent.add_child(slimes[i])
-	wave.slimeDivided()
 	queue_free()

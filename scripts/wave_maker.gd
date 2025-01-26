@@ -11,8 +11,9 @@ func _ready():
 @onready var parent = $".."
 @onready var player = $"../Player"
 
-var butget = 5
-var enemysLeft
+var budget = 5
+var enemiesLeft
+var coolDown = 0
 var queue = Array()
 var count = 0
 var roundCount = 1;
@@ -20,25 +21,21 @@ var roundCount = 1;
 const verticalOffset = 0.12
 const maxCoolDown = 3.0
 const groundRadious = 0.7
-const spawnRadio = 1.5
-const spawnLimitation = 0.3
+const spawnRadio = 0.6
+const spawnLimitation = 0.15
 const normalCost = 1
 const explosiveCost = 2
 const slimeSCost = 3
 
-var coolDown = maxCoolDown
-
-func slimeDivided():
-	enemysLeft += 2
 
 func enemyDied(enemy: Node3D) -> void:
-	enemysLeft -= 1
-	print(enemysLeft)
+	enemiesLeft -= 1
 
 func roundStart():
 	var label = $"../Camera3D/RichTextLabel"
 	label.text = "[font_size=100][center][font=res://resources/font2.ttf] Wave " + str(roundCount)
-	print(label.text)
+	#get_node("../Player/Shield").visibility.visible = true
+	get_node("../Player").shield = true
 	make_queue()
 
 func roundEnd():
@@ -53,13 +50,11 @@ func spawn():
 	var rand = Vector3(randf_range(-spawnRadio, spawnRadio),player.position.y,randf_range(-spawnRadio, spawnRadio))
 	while ((rand-player.position).length() < spawnLimitation):
 		rand = Vector3(randf_range(-spawnRadio, spawnRadio),player.position.y,randf_range(-spawnRadio, spawnRadio))
-	print(queue, choice)
 
 	var enemy = choice[queue[0] - 1].instantiate()
 	enemy.name = choice_name[queue[0] - 1] + str(count)
 	queue.remove_at(0)
 	enemy.transform.origin = Vector3(rand.x,rand.y + verticalOffset,rand.z)
-	print(count)
 	count += 1
 	parent.add_child(enemy)
 
@@ -69,14 +64,14 @@ func _physics_process(delta: float) -> void:
 	if coolDown <= 0:
 		coolDown = maxCoolDown
 		spawn()
-	if enemysLeft == 0:
+	if enemiesLeft == 0:
 		roundEnd()
 	
 
 func make_queue():
 	queue.clear()
 	var last = normalCost
-	var localButget = butget
+	var localButget = budget
 	while localButget > 0:
 		var next = randi() % 3 + 1
 		if (!(last == explosiveCost && next == explosiveCost)
@@ -85,6 +80,5 @@ func make_queue():
 			queue.append(next)
 			last = next
 			localButget -= next
-	print(queue)
-	butget = floor(butget * 1.2)
-	enemysLeft = queue.size();
+	budget = floor(budget * 1.2)
+	enemiesLeft = queue.size();

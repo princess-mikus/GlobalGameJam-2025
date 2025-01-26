@@ -1,11 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://3yt3ebdew1jm"]
+[gd_scene load_steps=9 format=3 uid="uid://3yt3ebdew1jm"]
 
 [ext_resource type="Script" path="res://scripts/bomb_enemy.gd" id="1_kx3n1"]
-[ext_resource type="Material" uid="uid://bhqsipjp6txyo" path="res://Butano_placeholder.tres" id="2_meykp"]
-[ext_resource type="Texture2D" uid="uid://bjda2x223sp7j" path="res://sprites/IMG_3094.png" id="2_rnerg"]
-[ext_resource type="Script" path="res://scripts/timer.gd" id="3_7cprt"]
-[ext_resource type="Material" uid="uid://b6yp3tetotxhv" path="res://Butano_exploder_placeholder.tres" id="3_wui53"]
-[ext_resource type="Texture2D" uid="uid://cqqkd54aqvqnt" path="res://sprites/IMG_3093.png" id="6_qsmog"]
+[ext_resource type="Material" path="res://Butano_placeholder.tres" id="2_meykp"]
+[ext_resource type="Material" path="res://Butano_exploder_placeholder.tres" id="3_wui53"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_qsgex"]
 
@@ -13,18 +10,6 @@
 
 [sub_resource type="Animation" id="Animation_lpioc"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_rnerg")]
-}
 
 [sub_resource type="Animation" id="Animation_bm8mo"]
 resource_name = "tic_tac"
@@ -41,52 +26,29 @@ tracks/0/keys = {
 "values": [ExtResource("2_meykp"), ExtResource("3_wui53"), ExtResource("2_meykp")]
 }
 
-[sub_resource type="Animation" id="Animation_wvplf"]
-resource_name = "butaninWalk"
-length = 0.7
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.333333, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [ExtResource("2_rnerg"), ExtResource("6_qsmog"), ExtResource("2_rnerg")]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_amulf"]
 _data = {
 "RESET": SubResource("Animation_lpioc"),
-"butaninWalk": SubResource("Animation_wvplf"),
 "tic_tac": SubResource("Animation_bm8mo")
 }
 
+
 [node name="Bomb_Enemy" type="CharacterBody3D"]
+
 transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0.12, 0)
 collision_mask = 3
 script = ExtResource("1_kx3n1")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(0.285464, 0, 0, 0, 0.285464, 0, 0, 0, 0.285464, 0, 0.501614, 0)
-texture = ExtResource("2_rnerg")
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-visible = false
 mesh = SubResource("SphereMesh_qsgex")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("2_meykp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 shape = SubResource("SphereShape3D_wkg68")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
-script = ExtResource("3_7cprt")
 
 [node name="Kaboom" type="Timer" parent="."]
 wait_time = 5.0
@@ -97,8 +59,7 @@ autostart = true
 libraries = {
 "": SubResource("AnimationLibrary_amulf")
 }
-autoplay = "butaninWalk"
+autoplay = "tic_tac"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="Timer" to="Timer" method="_on_timeout"]
 [connection signal="timeout" from="Kaboom" to="." method="_on_kaboom_timeout"]

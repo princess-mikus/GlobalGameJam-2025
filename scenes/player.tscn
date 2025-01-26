@@ -1,10 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://brnkx57g2q4mu"]
+[gd_scene load_steps=6 format=3 uid="uid://brnkx57g2q4mu"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_0gvct"]
 [ext_resource type="Texture2D" uid="uid://birur2h5s5eut" path="res://sprites/PLACEHOLDER_crosshair.png" id="2_3mxbu"]
-[ext_resource type="Texture2D" uid="uid://dp6235n3pw71d" path="res://sprites/IMG_3084.png" id="2_k8xv3"]
-[ext_resource type="Texture2D" uid="uid://c2eyovxum0cam" path="res://sprites/IMG_3083.png" id="4_xwdkg"]
-[ext_resource type="Texture2D" uid="uid://c7avwadvgrofs" path="res://sprites/IMG_3082.png" id="5_etytj"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8hdl7"]
 
@@ -12,93 +9,12 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tob63"]
 
-[sub_resource type="Animation" id="Animation_kiiij"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_k8xv3")]
-}
-tracks/1/type = "position_3d"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite3D")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0, 1.12584, 0)
-
-[sub_resource type="Animation" id="Animation_2bdo4"]
-resource_name = "playerIdle"
-length = 0.47
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_k8xv3")]
-}
-tracks/1/type = "position_3d"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite3D")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.233333, 1, 0, 0.126008, 0, 0.466667, 1, 0, 0, 0)
-
-[sub_resource type="Animation" id="Animation_toalw"]
-resource_name = "playerRun"
-length = 0.8
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.2, 1, 0, 0.3, 0, 0.4, 1, 0, 0, 0, 0.6, 1, 0, 0.3, 0, 0.8, 1, 0, 0, 0)
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite3D:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [ExtResource("4_xwdkg"), ExtResource("5_etytj"), ExtResource("5_etytj")]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ustix"]
-_data = {
-"RESET": SubResource("Animation_kiiij"),
-"playerIdle": SubResource("Animation_2bdo4"),
-"playerRun": SubResource("Animation_toalw")
-}
-
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0)
 script = ExtResource("1_0gvct")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(0.209, 0, 0, 0, 0.2, 0, 0, 0, 0.209, 0, 1.12584, 0)
-offset = Vector2(0, 500)
-texture = ExtResource("2_k8xv3")
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00700504, 0.992032, -0.0125644)
-visible = false
 mesh = SubResource("CapsuleMesh_8hdl7")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ys3wb")
@@ -111,7 +27,6 @@ shape = SubResource("CapsuleShape3D_tob63")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot"]
 transform = Transform3D(1, 0, 0, 0, 0.270233, 0, 0, 0, 1, 0.0284303, 1.4104, -0.318618)
-visible = false
 mesh = SubResource("CapsuleMesh_8hdl7")
 skeleton = NodePath("../..")
 
@@ -119,8 +34,8 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 texture = ExtResource("2_3mxbu")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_ustix")
-}
-autoplay = "playerIdle"
+[node name="Invulnerable" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="Invulnerable" to="." method="_on_invulnerable_timeout"]

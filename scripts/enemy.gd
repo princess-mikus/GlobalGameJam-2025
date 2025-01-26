@@ -3,7 +3,6 @@ extends CharacterBody3D
 @onready var player = $"../Player"
 @onready var timer = $Timer
 
-@onready var sprite = $Sprite3D
 @onready var mesh = $MeshInstance3D
 @onready var material = mesh.get_surface_override_material(0)
 @onready var originalColor = material.albedo_color
@@ -14,12 +13,13 @@ const maxKnockbackSpeed = 60
 const timeKnockback = 1
 const fallSpeed = 100
 const maxTimeFreeze = 2
-const damageArea = 0.22
+const damageArea = 0.18
 
 var dead = false
 var knockbackSpeed = 0
 var knockback = Vector3.ZERO
 var timeFreeze = 0
+
 
 func _physics_process(delta: float) -> void:
 	
@@ -36,9 +36,6 @@ func _physics_process(delta: float) -> void:
 		var playerCoor = player.transform.origin
 		var enemyCoor = transform.origin
 		direction = moveSpeed * (playerCoor - enemyCoor).normalized()
-		if sprite != null:
-			sprite.flip_h = direction.x > 0
-			sprite.modulate = Color(1,1,1)
 		#material.albedo_color = originalColor
 	elif knockbackSpeed > 0:
 		direction = knockbackSpeed * knockback.normalized()
@@ -66,5 +63,4 @@ func collision(collision: Vector3, name: String):
 	elif name == "Bubble_Gum":
 		knockbackSpeed = 0
 		timeFreeze = maxTimeFreeze
-		sprite.modulate = Color(1,0,1)
 		#material.albedo_color = Color(0,0,1)

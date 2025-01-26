@@ -15,7 +15,7 @@ const maxKnockbackSpeed = 100
 const timeKnockback = 1
 const fallSpeed = 100
 const maxTimeFreeze = 2
-const damageArea = 0.15
+const damageArea = 0.25
 
 var dead = false
 var knockbackSpeed = 0
@@ -66,3 +66,7 @@ func collision(collision: Vector3, name: String):
 		knockbackSpeed = 0
 		timeFreeze = maxTimeFreeze
 		#material.albedo_color = Color(0,0,1)
+
+func _on_timer_timeout() -> void:
+	dead = false
+	queue_free()
