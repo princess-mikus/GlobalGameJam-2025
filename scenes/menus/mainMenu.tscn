@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://h32tid45f2pb"]
+[gd_scene load_steps=8 format=3 uid="uid://h32tid45f2pb"]
 
 [ext_resource type="Texture2D" uid="uid://c56mjw8ct26gu" path="res://sprites/menuNamePlaceholder.png" id="1_8ewot"]
+[ext_resource type="Texture2D" uid="uid://c5dympqjgdwl0" path="res://sprites/IMG_3121.png" id="2_r5lxv"]
 [ext_resource type="Script" path="res://scripts/menus/play_buttom.gd" id="3_s2enb"]
 [ext_resource type="Script" path="res://scripts/menus/exitButtom.gd" id="5_waww0"]
 [ext_resource type="Script" path="res://scripts/menus/settingButtom.gd" id="6_ps0xf"]
@@ -42,9 +43,14 @@ anchor_left = 0.5
 anchor_right = 0.5
 grow_horizontal = 2
 
-[node name="menuNamePlaceholder" type="Sprite2D" parent="mainMenu/Name"]
+[node name="menuName" type="Sprite2D" parent="mainMenu/Name"]
 position = Vector2(0, 180)
 texture = ExtResource("1_8ewot")
+
+[node name="Img3121" type="Sprite2D" parent="mainMenu/Name"]
+position = Vector2(-256, 308)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_r5lxv")
 
 [node name="credits" type="RichTextLabel" parent="mainMenu"]
 layout_mode = 1
@@ -52,8 +58,10 @@ anchors_preset = -1
 anchor_top = 0.771
 anchor_right = 0.486
 anchor_bottom = 1.0
-offset_top = -20.0
-offset_right = 100.0
+offset_left = 529.0
+offset_top = -114.76
+offset_right = 629.0
+offset_bottom = -94.76
 grow_vertical = 0
 bbcode_enabled = true
 text = "[font_size=100][font=resources/font4.ttf][center][color=#c7c3b9]CREDITS"
@@ -74,14 +82,15 @@ scale = Vector2(0.711344, 0.254342)
 uri = "\"https://itch.io/profile/mermelada-taldea\""
 script = ExtResource("8_xtnmj")
 metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [node name="play" type="RichTextLabel" parent="mainMenu"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.000925926
-anchor_top = 0.364286
-anchor_right = 0.313074
-anchor_bottom = 0.568286
+anchor_left = 0.507407
+anchor_top = -0.0625
+anchor_right = 0.821407
+anchor_bottom = 0.1415
 offset_top = 70.0
 offset_right = 250.0
 offset_bottom = 70.0
@@ -114,10 +123,10 @@ anchor_left = 0.602
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.691
-offset_left = -98.16
-offset_top = -16.0
-offset_right = 2.0
-offset_bottom = 7.04001
+offset_left = -69.16
+offset_top = -102.0
+offset_right = 31.0
+offset_bottom = -78.96
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -148,8 +157,10 @@ anchor_left = 0.655
 anchor_top = 0.785
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -200.0
-offset_top = -20.0
+offset_left = -166.4
+offset_top = 15.4
+offset_right = 33.6001
+offset_bottom = 35.4
 grow_horizontal = 0
 grow_vertical = 0
 bbcode_enabled = true
