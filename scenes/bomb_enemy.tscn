@@ -26,21 +26,6 @@ tracks/0/keys = {
 "values": [ExtResource("2_rnerg")]
 }
 
-[sub_resource type="Animation" id="Animation_bm8mo"]
-resource_name = "tic_tac"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:material_override")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [ExtResource("2_meykp"), ExtResource("3_wui53"), ExtResource("2_meykp")]
-}
-
 [sub_resource type="Animation" id="Animation_wvplf"]
 resource_name = "butaninWalk"
 length = 0.7
@@ -56,6 +41,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [ExtResource("2_rnerg"), ExtResource("6_qsmog"), ExtResource("2_rnerg")]
+}
+
+[sub_resource type="Animation" id="Animation_bm8mo"]
+resource_name = "tic_tac"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:material_override")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_meykp"), ExtResource("3_wui53"), ExtResource("2_meykp")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_amulf"]
