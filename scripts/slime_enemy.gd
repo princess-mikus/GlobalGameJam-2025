@@ -4,13 +4,18 @@ extends CharacterBody3D
 @onready var player = $"../Player"
 @onready var timer = $Timer
 
+@onready var sprite = $Sprite3D
+@onready var gum = $Gum
 @onready var wave = $"../waveMaker"
 @onready var mesh = $MeshInstance3D
-@onready var material = mesh.get_surface_override_material(0)
-@onready var originalColor = material.albedo_color
 @onready var originalPosition = transform.origin
 
 @onready var slimelingScene = preload("res://scenes/slimeling_enemy.tscn")
+
+@onready var mat1 = preload("res://sprites/IMG_3100.png")
+@onready var mat2 = preload("res://sprites/IMG_3101.png")
+@onready var mat3 = preload("res://sprites/IMG_3102.png")
+
 
 const moveSpeed = 20
 
@@ -20,7 +25,7 @@ const fallSpeed = 100
 const maxTimeFreeze = 2
 const damageArea = 0.4
 const probDivide = 0.5
-const verticalOffset = 0.08
+const verticalOffset = 0.16
 
 var dead = false
 var knockbackSpeed = 0
@@ -46,6 +51,10 @@ func _physics_process(delta: float) -> void:
 		var enemyCoor = transform.origin
 		direction = moveSpeed * (playerCoor - enemyCoor).normalized()
 		#material.albedo_color = originalColor
+		if sprite != null:
+			sprite.flip_h = direction.x > 0
+			sprite.modulate = Color(1,1,1)
+			gum.visible = false
 	elif knockbackSpeed > 0:
 		direction = knockbackSpeed * knockback.normalized()
 		knockbackSpeed -= maxKnockbackSpeed/(60.0*timeKnockback)
@@ -75,14 +84,18 @@ func collision(collision: Vector3, name: String):
 	elif name == "Bubble_Gum":
 		knockbackSpeed = 0
 		timeFreeze = maxTimeFreeze
+		sprite.modulate = Color(1,0,1)
+		gum.visible = true
 		#material.albedo_color = Color(0,0,1)
 
 func divide():
 	var slimes = [slimelingScene.instantiate(),slimelingScene.instantiate(),slimelingScene.instantiate()]
 	var offset = [Vector3(0.1,0,0),Vector3(0,0,0.1),Vector3(-0.1,0,0)]
+	var sprites = [mat1,mat2,mat3]
 	for i in slimes.size():
 		slimes[i].transform.origin = global_position + Vector3(0,verticalOffset,0) + offset[i]
 		slimes[i].name = name + "_" + str(i)
+		slimes[i].get_child(0).texture = sprites[i]
 		parent.add_child(slimes[i])
 	wave.slimeDivided()
 	queue_free()

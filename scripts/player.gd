@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
 const SPEED = 2.0
-const maxCoolDownBubble = 0.5
-const maxCoolDownBubbleGum = 2.5
+const maxCoolDownBubble = 0.25
+const maxCoolDownBubbleGum = 1.5
 const chargedElapsed = 1
 const chargedScale = 0.20
 const nonChargedScale = 0.10
@@ -11,10 +11,15 @@ const horizontalOffset = 0.2
 const maxKnockbackSpeed = 1
 const timeKnockback = 0.1
 
-const damageArea = 15
-const gumArea = 10
+const damageArea = 5
+const gumArea = 3
 
 const explosionKnockBack = 5
+
+@onready var bubbleChargeAudio = $"../BubbleCharge"
+var playingBubbleChargeAudio = false
+@onready var bubbleGumChargeAudio = $"../BubbleGumCharge"
+@onready var hitAudio = $"../Hit"
 
 @onready var shieldBubble = $Shield
 @onready var sprite = $Sprite3D
@@ -42,9 +47,12 @@ var invulnerableTime = 2.05
 
 func _input(event):
 	if Input.is_action_just_released("bubble") and coolDownBubble <= 0 and chargingBubble != null:
+		playingBubbleChargeAudio = false
+		bubbleChargeAudio.stop()
 		coolDownBubble = maxCoolDownBubble
 		chargingBubble.direction = pivot.get_global_transform().basis * Vector3(0,0,-1)
 		chargingBubble.explode = scaleBubble >= chargedScale
+		chargingBubble.holded = false
 		chargingBubble.get_child(3).play("RESET")
 		chargingBubble = null
 		timeStart = 0
@@ -60,6 +68,7 @@ func _input(event):
 		chargingBubble.get_child(2).scale = damageArea*Vector3.ONE*scaleBubble
 		parent.add_child(chargingBubble)
 	elif Input.is_action_just_pressed("bubble_gum") and coolDownBubbleGum <= 0 and timeStart <= 0:
+		bubbleGumChargeAudio.play(1.8)
 		coolDownBubbleGum = maxCoolDownBubbleGum
 		var bubble_gum = bubble_gum_scene.instantiate()
 		scaleOriginal = bubble_gum.get_child(0).transform.basis.get_scale()
@@ -80,6 +89,10 @@ func _physics_process(delta: float) -> void:
 		chargingBubble.get_child(2).scale = damageArea*Vector3.ONE*scaleBubble
 		if (Time.get_ticks_msec()-timeStart)/1000.0 > chargedElapsed:
 			chargingBubble.get_child(3).play("bubbleFlickering")
+			
+		if (Time.get_ticks_msec()-timeStart)/1000.0 > 0.2 and not playingBubbleChargeAudio:
+			playingBubbleChargeAudio = true
+			bubbleChargeAudio.play(1.4)
 		
 	if coolDownBubble > 0:
 		coolDownBubble -= (1.0/60)
@@ -127,6 +140,9 @@ func _physics_process(delta: float) -> void:
 		sprite.flip_h = position.x - result.position.x >= 0
 
 func	 _on_damage(position: Vector3, explosion: bool):
+	
+	if not invulnerable:
+		hitAudio.play()
 	# DEJAR
 	if knockbackSpeed <= 0:
 		var enemyCoor = transform.origin

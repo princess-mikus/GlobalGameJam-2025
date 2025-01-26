@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cc85u5l1ty16w"]
 
 [ext_resource type="Script" path="res://scripts/explosion.gd" id="1_6e28h"]
-[ext_resource type="Texture2D" uid="uid://c8h84to2bpiii" path="res://sprites/butanitoExplosion.png" id="2_3kmk2"]
+[ext_resource type="Texture2D" uid="uid://bx4no5wqvfmhy" path="res://sprites/IMG_3119.png" id="2_7yxw0"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ojpxf"]
 
@@ -83,7 +83,7 @@ autostart = true
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.171, 0, 0, 0, 0.171, 0, 0, 0, 0.171, 0, 0.0389228, 0)
 offset = Vector2(0, 211)
-texture = ExtResource("2_3kmk2")
+texture = ExtResource("2_7yxw0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
