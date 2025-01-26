@@ -14,6 +14,8 @@ const timeKnockback = 0.1
 const damageArea = 15
 const gumArea = 10
 
+const explosionKnockBack = 5
+
 @onready var shieldBubble = $Sprite3D2
 @onready var sprite = $Sprite3D
 @onready var bubble_scene = preload("res://scenes/bubble.tscn")
@@ -123,12 +125,14 @@ func _physics_process(delta: float) -> void:
 		$Pivot.look_at(Vector3(result.position.x, 0, result.position.z))
 		sprite.flip_h = position.x - result.position.x >= 0
 
-func	 _on_damage(position: Vector3):
+func	 _on_damage(position: Vector3, explosion: bool):
 	# DEJAR
 	if knockbackSpeed <= 0:
 		var enemyCoor = transform.origin
 		knockback = enemyCoor - position
 		knockbackSpeed = maxKnockbackSpeed
+		if explosion:
+			knockbackSpeed = maxKnockbackSpeed*explosionKnockBack
 	if shield and not invulnerable:
 		shield = false
 		shieldBubble.visible = false

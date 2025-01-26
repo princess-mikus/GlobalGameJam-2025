@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://6cwkrx6j1m6p"]
+[gd_scene load_steps=3 format=3 uid="uid://r45ml8tohqxq"]
 
 [ext_resource type="Script" path="res://scripts/death.gd" id="1_8f8j3"]
 [ext_resource type="Texture2D" uid="uid://dfs6ke1r16qj5" path="res://icon.svg" id="1_xshot"]

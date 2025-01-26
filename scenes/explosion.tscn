@@ -1,15 +1,78 @@
-[gd_scene load_steps=4 format=3 uid="uid://cc85u5l1ty16w"]
+[gd_scene load_steps=7 format=3 uid="uid://cc85u5l1ty16w"]
 
 [ext_resource type="Script" path="res://scripts/explosion.gd" id="1_6e28h"]
 [ext_resource type="Texture2D" uid="uid://c8h84to2bpiii" path="res://sprites/butanitoExplosion.png" id="2_3kmk2"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ojpxf"]
 
+[sub_resource type="Animation" id="Animation_kj3oq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.0389228, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xngeu"]
+resource_name = "jiggle"
+length = 0.14
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.0389228, 0), Vector3(0.05, 0.039, 0), Vector3(0, 0.0389228, 0), Vector3(-0.1, 0.039, 0), Vector3(0, 0.039, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hxct4"]
+_data = {
+"RESET": SubResource("Animation_kj3oq"),
+"jiggle": SubResource("Animation_xngeu")
+}
+
 [node name="Explosion" type="Area3D"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("1_6e28h")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.7, 0, 0, 0, 1.7, 0, 0, 0, 1.7, 0, 0, 0)
 shape = SubResource("SphereShape3D_ojpxf")
 
 [node name="Duration" type="Timer" parent="."]
@@ -18,8 +81,14 @@ one_shot = true
 autostart = true
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(0.09, 0, 0, 0, 0.09, 0, 0, 0, 0.09, 0, 0.0389228, 0)
-offset = Vector2(0, 500)
+transform = Transform3D(0.171, 0, 0, 0, 0.171, 0, 0, 0, 0.171, 0, 0.0389228, 0)
+offset = Vector2(0, 211)
 texture = ExtResource("2_3kmk2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hxct4")
+}
+autoplay = "jiggle"
 
 [connection signal="timeout" from="Duration" to="." method="_on_duration_timeout"]

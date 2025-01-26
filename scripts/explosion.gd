@@ -1,7 +1,7 @@
 extends Area3D
 
 const maxSize = 1
-const explosionTime = 0.2
+const explosionTime = 0.1
 
 @onready var sprite = $Sprite3D
 @onready var originalScale = sprite.transform.basis.get_scale()
@@ -25,4 +25,4 @@ func _on_duration_timeout() -> void:
 
 func _on_body_in_area(body):
 	if body.name == "Player":
-		body._on_damage(position)
+		body._on_damage(position,true)

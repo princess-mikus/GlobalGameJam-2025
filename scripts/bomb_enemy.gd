@@ -59,7 +59,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	if (position-player.position).length() <= damageArea:
-		player._on_damage(position)
+		player._on_damage(position,false)
 	
 func collision(collision: Vector3, name: String):
 	if name == "Bubble" and timeFreeze <= 0:
