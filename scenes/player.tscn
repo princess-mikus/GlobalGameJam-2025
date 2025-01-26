@@ -124,3 +124,7 @@ libraries = {
 "": SubResource("AnimationLibrary_ustix")
 }
 autoplay = "playerIdle"
+
+[node name="Invulnerability" type="Timer" parent="."]
+
+[connection signal="timeout" from="Invulnerability" to="." method="_on_invulnerability_timeout"]

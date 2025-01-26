@@ -33,6 +33,10 @@ var scaleBubble = 0
 var knockbackSpeed = 0
 var knockback = Vector3.ZERO
 
+var shield = true
+var invulnerable = false
+var invulnerableTime = 1.0
+
 func _input(event):
 	if Input.is_action_just_released("bubble") and coolDownBubble <= 0 and chargingBubble != null:
 		coolDownBubble = maxCoolDownBubble
@@ -117,7 +121,21 @@ func _physics_process(delta: float) -> void:
 		sprite.flip_h = position.x - result.position.x >= 0
 
 func	_on_damage(position: Vector3):
+	# DEJAR
 	if knockbackSpeed <= 0:
 		var enemyCoor = transform.origin
 		knockback = enemyCoor - position
 		knockbackSpeed = maxKnockbackSpeed
+	if shield and not invulnerable:
+		shield = false
+		invulnerable = true
+		print("hit")
+		$Invulnerability.start(invulnerableTime)
+		#$Shield.visibility.visible = true
+	elif not invulnerable:
+		var	deathScreen = preload("res://scenes/death.tscn").instantiate()
+		$"..".get_tree().root.add_child(deathScreen)
+		$"..".get_tree().paused = true
+
+func _on_invulnerability_timeout() -> void:
+	invulnerable = false

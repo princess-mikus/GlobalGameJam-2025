@@ -1,17 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://r45ml8tohqxq"]
+[gd_scene load_steps=3 format=3 uid="uid://6cwkrx6j1m6p"]
 
-[ext_resource type="Script" path="res://scenes/death.gd" id="1_1myjr"]
+[ext_resource type="Script" path="res://scripts/death.gd" id="1_8f8j3"]
 [ext_resource type="Texture2D" uid="uid://dfs6ke1r16qj5" path="res://icon.svg" id="1_xshot"]
 
 [node name="Death" type="Node2D"]
 process_mode = 3
-script = ExtResource("1_1myjr")
+script = ExtResource("1_8f8j3")
 
 [node name="Background" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
 scale = Vector2(29.5234, 17.7266)
 texture = ExtResource("1_xshot")
-metadata/_edit_lock_ = true
 
 [node name="PlayAgain" type="Button" parent="."]
 anchors_preset = 2
