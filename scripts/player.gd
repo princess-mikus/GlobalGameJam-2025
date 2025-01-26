@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
 const SPEED = 2.0
-const maxCoolDownBubble = 0.5
-const maxCoolDownBubbleGum = 2.5
+const maxCoolDownBubble = 0.25
+const maxCoolDownBubbleGum = 1.5
 const chargedElapsed = 1
 const chargedScale = 0.20
 const nonChargedScale = 0.10
@@ -11,8 +11,8 @@ const horizontalOffset = 0.2
 const maxKnockbackSpeed = 1
 const timeKnockback = 0.1
 
-const damageArea = 15
-const gumArea = 10
+const damageArea = 5
+const gumArea = 3
 
 const explosionKnockBack = 5
 

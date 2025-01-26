@@ -124,7 +124,7 @@ transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0)
 script = ExtResource("1_0gvct")
 
 [node name="Shield" type="Sprite3D" parent="."]
-transform = Transform3D(0.365719, 0, 0, 0, 0.365719, 0, 0, 0, 0.415197, 0, 1.6, 0.25)
+transform = Transform3D(0.365719, 0, 0, 0, 0.365719, 0, 0, 0, 0.415197, 0, 1.6, 0.0542244)
 modulate = Color(0.775028, 0.000569676, 0.795354, 0.443137)
 texture = ExtResource("2_h8p3e")
 
