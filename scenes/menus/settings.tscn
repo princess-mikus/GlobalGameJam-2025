@@ -1,0 +1,135 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8tn0o1orpsio"]
+
+[ext_resource type="Script" path="res://scripts/menus/backButton.gd" id="1_eegfq"]
+[ext_resource type="Script" path="res://scripts/menus/brigth_slide.gd" id="1_r5qa2"]
+[ext_resource type="Script" path="res://scripts/menus/fullscreen_check.gd" id="2_2oqcf"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hdsop"]
+load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
+
+[node name="settings" type="CanvasLayer"]
+offset = Vector2(580, 340)
+transform = Transform2D(1, 0, 0, 1, 580, 340)
+
+[node name="mainBackground" type="Sprite2D" parent="."]
+modulate = Color(100, 0, 0, 1)
+scale = Vector2(7000, 3888.82)
+texture = SubResource("CompressedTexture2D_hdsop")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="title" type="RichTextLabel" parent="."]
+offset_left = -296.0
+offset_top = -296.0
+offset_right = 302.0
+offset_bottom = -128.0
+bbcode_enabled = true
+text = "[center][font=resources/font2.ttf][font_size=150][color=black]SETTINGS"
+fit_content = true
+autowrap_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="back" type="RichTextLabel" parent="."]
+offset_left = -66.0
+offset_top = 96.0
+offset_right = 532.0
+offset_bottom = 264.0
+bbcode_enabled = true
+text = "[center][font=resources/font2.ttf][font_size=150][color=black]back"
+fit_content = true
+autowrap_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="back"]
+layout_mode = 0
+offset_left = 91.0
+offset_right = 99.0
+offset_bottom = 8.0
+scale = Vector2(57.2654, 21.146)
+script = ExtResource("1_eegfq")
+
+[node name="volumen" type="RichTextLabel" parent="."]
+offset_left = -578.0
+offset_top = -88.0
+offset_right = -267.0
+offset_bottom = 63.0
+bbcode_enabled = true
+text = "[center][font=resources/font.ttf][font_size=70][color=black]volumen"
+fit_content = true
+autowrap_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="brigth" type="RichTextLabel" parent="."]
+offset_left = -578.0
+offset_top = 15.0
+offset_right = -267.0
+offset_bottom = 166.0
+bbcode_enabled = true
+text = "[center][font=resources/font.ttf][font_size=70][color=black]brigth"
+fit_content = true
+autowrap_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="fullScreen" type="RichTextLabel" parent="."]
+offset_left = -578.0
+offset_top = 218.0
+offset_right = -267.0
+offset_bottom = 369.0
+bbcode_enabled = true
+text = "[center][font=resources/font.ttf][font_size=70][color=black]fullscreen"
+fit_content = true
+autowrap_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="highContrast" type="RichTextLabel" parent="."]
+offset_left = -578.0
+offset_top = 114.0
+offset_right = -267.0
+offset_bottom = 265.0
+bbcode_enabled = true
+text = "[center][font=resources/font.ttf][font_size=70][color=black]high contrast"
+fit_content = true
+autowrap_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="volumenSlide" type="HSlider" parent="."]
+custom_minimum_size = Vector2(600, 0)
+offset_left = -296.0
+offset_top = -69.0
+offset_right = 304.0
+offset_bottom = -53.0
+metadata/_edit_use_anchors_ = true
+
+[node name="brigthSlide" type="HSlider" parent="."]
+custom_minimum_size = Vector2(600, 0)
+offset_left = -296.0
+offset_top = 34.0
+offset_right = 304.0
+offset_bottom = 50.0
+min_value = 0.5
+max_value = 1.0
+step = 0.01
+value = 0.5
+script = ExtResource("1_r5qa2")
+metadata/_edit_use_anchors_ = true
+
+[node name="highContrastCheck" type="CheckBox" parent="."]
+offset_left = -152.0
+offset_top = 114.0
+offset_right = -128.0
+offset_bottom = 138.0
+scale = Vector2(2.64116, 2.64116)
+metadata/_edit_use_anchors_ = true
+
+[node name="fullscreenCheck" type="CheckBox" parent="."]
+offset_left = -152.0
+offset_top = 211.0
+offset_right = -128.0
+offset_bottom = 235.0
+scale = Vector2(2.64116, 2.64116)
+script = ExtResource("2_2oqcf")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="button_up" from="back/Button" to="back/Button" method="_on_button_up"]
+[connection signal="value_changed" from="brigthSlide" to="brigthSlide" method="_on_value_changed"]
+[connection signal="button_up" from="fullscreenCheck" to="fullscreenCheck" method="_on_button_up"]

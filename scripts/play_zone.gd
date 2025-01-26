@@ -13,6 +13,4 @@ func _on_body_exited(body: Node3D) -> void:
 
 
 func _on_timer_timeout() -> void:
-	var	deathScreen = preload("res://scenes/death.tscn").instantiate()
-	$"..".get_tree().root.add_child(deathScreen)
-	$"..".get_tree().paused = true
+	get_tree().change_scene_to_file("res://scenes/death.tscn")

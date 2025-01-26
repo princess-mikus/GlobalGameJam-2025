@@ -27,14 +27,6 @@ projection = 1
 fov = 116.76
 size = 1.80756
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Camera3D"]
-offset_right = 1152.0
-offset_bottom = 137.0
-bbcode_enabled = true
-text = "[font_size=100][center][font=res://resources/font.ttf] Wave 1"
-fit_content = true
-scroll_active = false
-
 [node name="PhantomCameraHost" type="Node" parent="Camera3D"]
 process_priority = 300
 process_physics_priority = 300
@@ -76,6 +68,15 @@ follow_mode = 2
 follow_target = NodePath("../Player")
 tween_resource = SubResource("Resource_dmwmr")
 follow_offset = Vector3(0, 3, 4)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+offset_right = 1152.0
+offset_bottom = 137.0
+bbcode_enabled = true
+text = "[font_size=100][center][font=res://resources/font.ttf] Wave 1"
+scroll_active = false
 
 [connection signal="body_exited" from="PlayZone" to="PlayZone" method="_on_body_exited"]
 [connection signal="timeout" from="PlayZone/Timer" to="PlayZone" method="_on_timer_timeout"]

@@ -33,12 +33,12 @@ func slimeDivided():
 
 func enemyDied(enemy: Node3D) -> void:
 	enemysLeft -= 1
-	print(enemysLeft)
 
 func roundStart():
-	var label = $"../Camera3D/RichTextLabel"
+	var label = $"../CanvasLayer/RichTextLabel"
 	label.text = "[font_size=100][center][font=res://resources/font2.ttf] Wave " + str(roundCount)
-	print(label.text)
+	player.shield = true
+	player.get_node("Shield").visible = true
 	make_queue()
 
 func roundEnd():
@@ -53,13 +53,11 @@ func spawn():
 	var rand = Vector3(randf_range(-spawnRadio, spawnRadio),player.position.y,randf_range(-spawnRadio, spawnRadio))
 	while ((rand-player.position).length() < spawnLimitation):
 		rand = Vector3(randf_range(-spawnRadio, spawnRadio),player.position.y,randf_range(-spawnRadio, spawnRadio))
-	print(queue, choice)
 
 	var enemy = choice[queue[0] - 1].instantiate()
 	enemy.name = choice_name[queue[0] - 1] + str(count)
 	queue.remove_at(0)
 	enemy.transform.origin = Vector3(rand.x,rand.y + verticalOffset,rand.z)
-	print(count)
 	count += 1
 	parent.add_child(enemy)
 
@@ -85,6 +83,5 @@ func make_queue():
 			queue.append(next)
 			last = next
 			localButget -= next
-	print(queue)
 	butget = floor(butget * 1.2)
 	enemysLeft = queue.size();

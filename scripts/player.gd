@@ -16,7 +16,7 @@ const gumArea = 10
 
 const explosionKnockBack = 5
 
-@onready var shieldBubble = $Sprite3D2
+@onready var shieldBubble = $Shield
 @onready var sprite = $Sprite3D
 @onready var bubble_scene = preload("res://scenes/bubble.tscn")
 @onready var bubble_gum_scene = preload("res://scenes/bubble_gum.tscn")
@@ -45,6 +45,7 @@ func _input(event):
 		coolDownBubble = maxCoolDownBubble
 		chargingBubble.direction = pivot.get_global_transform().basis * Vector3(0,0,-1)
 		chargingBubble.explode = scaleBubble >= chargedScale
+		chargingBubble.get_child(3).play("RESET")
 		chargingBubble = null
 		timeStart = 0
 	elif Input.is_action_pressed("bubble") and coolDownBubble <= 0 and chargingBubble == null:
@@ -70,7 +71,6 @@ func _input(event):
 		parent.add_child(bubble_gum)
 		
 func _physics_process(delta: float) -> void:
-	
 	if chargingBubble != null:
 		chargingBubble.transform.origin = global_position + Vector3(0,verticalOffset,0) + horizontalOffset*(pivot.get_global_transform().basis * Vector3(0,0,-1)).normalized()
 		if scaleBubble < chargedScale:
@@ -78,7 +78,8 @@ func _physics_process(delta: float) -> void:
 			chargingBubble.get_child(0).scale = scaleOriginal*scaleBubble
 		chargingBubble.get_child(1).scale = Vector3.ONE*scaleBubble
 		chargingBubble.get_child(2).scale = damageArea*Vector3.ONE*scaleBubble
-		#if (Time.get_ticks_msec()-timeStart)/1000.0 > chargedElapsed:
+		if (Time.get_ticks_msec()-timeStart)/1000.0 > chargedElapsed:
+			chargingBubble.get_child(3).play("bubbleFlickering")
 		
 	if coolDownBubble > 0:
 		coolDownBubble -= (1.0/60)
@@ -149,12 +150,8 @@ func	 _on_damage(position: Vector3, explosion: bool):
 		shieldKnock.get_child(1).scale = Vector3.ONE*chargedScale
 		shieldKnock.get_child(2).scale = damageArea*Vector3.ONE*chargedScale
 		parent.add_child(shieldKnock)
-		#shieldKnock.queue_free()
-		#$Shield.visibility.visible = true
 	elif not invulnerable:
-		var	deathScreen = preload("res://scenes/death.tscn").instantiate()
-		$"..".get_tree().root.add_child(deathScreen)
-		$"..".get_tree().paused = true
+		get_tree().change_scene_to_file("res://scenes/death.tscn")
 
 func _on_invulnerability_timeout() -> void:
 	invulnerable = false

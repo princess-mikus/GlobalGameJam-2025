@@ -1,0 +1,172 @@
+[gd_scene load_steps=7 format=3 uid="uid://h32tid45f2pb"]
+
+[ext_resource type="Texture2D" uid="uid://c56mjw8ct26gu" path="res://sprites/menuNamePlaceholder.png" id="1_8ewot"]
+[ext_resource type="Script" path="res://scripts/menus/play_buttom.gd" id="3_s2enb"]
+[ext_resource type="Script" path="res://scripts/menus/exitButtom.gd" id="5_waww0"]
+[ext_resource type="Script" path="res://scripts/menus/settingButtom.gd" id="6_ps0xf"]
+[ext_resource type="Script" path="res://scripts/menus/creditsButtom.gd" id="8_xtnmj"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3n5go"]
+load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
+
+[node name="menu" type="CanvasLayer"]
+
+[node name="mainBackground" type="Sprite2D" parent="."]
+modulate = Color(100, 100, 100, 1)
+position = Vector2(463, 360)
+scale = Vector2(44, 24.444)
+texture = SubResource("CompressedTexture2D_3n5go")
+
+[node name="mainMenu" type="Control" parent="."]
+custom_minimum_size = Vector2(1080, 560)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Name" type="Control" parent="mainMenu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+
+[node name="menuNamePlaceholder" type="Sprite2D" parent="mainMenu/Name"]
+position = Vector2(0, 180)
+texture = ExtResource("1_8ewot")
+
+[node name="credits" type="RichTextLabel" parent="mainMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.771
+anchor_right = 0.486
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_right = 100.0
+grow_vertical = 0
+bbcode_enabled = true
+text = "[center][font=resources/font2.ttf][font_size=100
+][color=black]credits"
+
+[node name="creditsButtom" type="LinkButton" parent="mainMenu/credits"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.230409
+anchor_top = 0.145428
+anchor_right = 0.230409
+anchor_bottom = 0.596756
+offset_left = -39.8163
+offset_top = -18.4888
+offset_right = 503.184
+offset_bottom = 439.511
+scale = Vector2(0.711344, 0.254342)
+uri = "\"https://itch.io/profile/mermelada-taldea\""
+script = ExtResource("8_xtnmj")
+metadata/_edit_use_anchors_ = true
+
+[node name="play" type="RichTextLabel" parent="mainMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.398
+anchor_right = 0.314
+anchor_bottom = 0.602
+offset_top = 70.0
+offset_right = 250.0
+offset_bottom = 70.0
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center][font=resources/font2.ttf][font_size=100
+][color=black]play
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="playButtom" type="Button" parent="mainMenu/play"]
+modulate = Color(0, 0, 0, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.178367
+anchor_top = -0.10518
+anchor_right = 0.178367
+anchor_bottom = -0.10518
+offset_right = 368.0
+offset_bottom = 368.0
+scale = Vector2(1.04648, 0.465171)
+script = ExtResource("3_s2enb")
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="settings" type="RichTextLabel" parent="mainMenu"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.602
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.691
+offset_left = -100.0
+offset_bottom = 0.231964
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 4
+bbcode_enabled = true
+text = "[center][font=resources/font2.ttf][font_size=100
+][color=black]settings
+"
+
+[node name="settingButtom" type="Button" parent="mainMenu/settings"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0883093
+anchor_right = 0.797658
+anchor_bottom = 1.116
+offset_left = -0.2501
+offset_top = -5.0
+offset_right = 237.146
+offset_bottom = 127.616
+scale = Vector2(0.691669, 0.529053)
+script = ExtResource("6_ps0xf")
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="quit" type="RichTextLabel" parent="mainMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.655
+anchor_top = 0.785
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+bbcode_enabled = true
+text = "[center][font=resources/font2.ttf][font_size=100
+][color=black]quit
+"
+
+[node name="exitButtom" type="Button" parent="mainMenu/quit"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 200.0
+offset_right = 1232.0
+offset_bottom = 776.0
+scale = Vector2(0.235704, 0.189272)
+script = ExtResource("5_waww0")
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[connection signal="button_up" from="mainMenu/credits/creditsButtom" to="mainMenu/credits/creditsButtom" method="_on_button_up"]
+[connection signal="button_up" from="mainMenu/credits/creditsButtom" to="mainMenu/play/playButtom" method="_on_setting_buttom_button_up"]
+[connection signal="button_up" from="mainMenu/play/playButtom" to="mainMenu/play/playButtom" method="_on_button_up"]
+[connection signal="button_up" from="mainMenu/settings/settingButtom" to="mainMenu/play/playButtom" method="_on_setting_buttom_button_up"]
+[connection signal="button_up" from="mainMenu/settings/settingButtom" to="mainMenu/settings/settingButtom" method="_on_button_up"]
+[connection signal="button_up" from="mainMenu/quit/exitButtom" to="mainMenu/play/playButtom" method="_on_setting_buttom_button_up"]
+[connection signal="button_up" from="mainMenu/quit/exitButtom" to="mainMenu/quit/exitButtom" method="_on_button_up"]
