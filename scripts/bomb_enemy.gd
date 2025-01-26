@@ -5,9 +5,6 @@ extends CharacterBody3D
 
 @onready var animation = $AnimationPlayer
 @onready var sprite = $Sprite3D
-@onready var mesh = $MeshInstance3D
-@onready var material = mesh.get_surface_override_material(0)
-@onready var originalColor = material.albedo_color
 @onready var originalPosition = transform.origin
 @onready var explosionScene = preload("res://scenes/explosion.tscn")
 
