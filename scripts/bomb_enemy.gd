@@ -5,6 +5,7 @@ extends CharacterBody3D
 
 @onready var animation = $AnimationPlayer
 @onready var sprite = $Sprite3D
+@onready var gum = $Gum
 @onready var originalPosition = transform.origin
 @onready var explosionScene = preload("res://scenes/explosion.tscn")
 
@@ -41,6 +42,7 @@ func _physics_process(delta: float) -> void:
 		if sprite != null:
 			sprite.flip_h = direction.x > 0
 			sprite.modulate = Color(1,1,1)
+			gum.visible = false
 	elif knockbackSpeed > 0:
 		direction = knockbackSpeed * knockback.normalized()
 		knockbackSpeed -= maxKnockbackSpeed/(60.0*timeKnockback)
@@ -70,6 +72,7 @@ func collision(collision: Vector3, name: String):
 		timeFreeze = maxTimeFreeze
 		sprite.modulate = Color(1,0,1)
 		animation.pause()
+		gum.visible = true
 		#material.albedo_color = Color(0,0,1)
 
 func _on_area_3d_body_exited(body: Node3D) -> void:

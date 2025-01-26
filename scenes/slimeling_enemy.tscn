@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3k241wcsl12y"]
+[gd_scene load_steps=6 format=3 uid="uid://c3k241wcsl12y"]
 
 [ext_resource type="Script" path="res://scripts/slimeling_enemy.gd" id="1_iws2n"]
 [ext_resource type="Texture2D" uid="uid://d1qmgwmbf02si" path="res://sprites/IMG_3100.png" id="2_aehlo"]
 [ext_resource type="Script" path="res://scripts/timer.gd" id="2_ojrxu"]
+[ext_resource type="Texture2D" uid="uid://c8rwjvypfmujb" path="res://sprites/IMG_3114.png" id="4_ape2e"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_rw5ry"]
 
@@ -14,6 +15,10 @@ script = ExtResource("1_iws2n")
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 2.15639, 0)
 texture = ExtResource("2_aehlo")
+
+[node name="Gum" type="Sprite3D" parent="."]
+transform = Transform3D(0.36, 0, 0, 0, 0.36, 0, 0, 0, 0.36, 0.076194, 2.05128, 3.48173)
+texture = ExtResource("4_ape2e")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 2.00407, 0)

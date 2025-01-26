@@ -4,6 +4,7 @@ extends CharacterBody3D
 @onready var timer = $Timer
 
 @onready var sprite = $Sprite3D
+@onready var gum = $Gum
 @onready var originalPosition = transform.origin
 
 const moveSpeed = 20
@@ -36,6 +37,7 @@ func _physics_process(delta: float) -> void:
 		if sprite != null:
 			sprite.flip_h = direction.x > 0
 			sprite.modulate = Color(1,1,1)
+			gum.visible = false
 		#material.albedo_color = originalColor
 	elif knockbackSpeed > 0:
 		direction = knockbackSpeed * knockback.normalized()
@@ -64,4 +66,5 @@ func collision(collision: Vector3, name: String):
 		knockbackSpeed = 0
 		timeFreeze = maxTimeFreeze
 		sprite.modulate = Color(1,0,1)
+		gum.visible = true
 		#material.albedo_color = Color(0,0,1)

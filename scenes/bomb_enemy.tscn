@@ -1,13 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://3yt3ebdew1jm"]
+[gd_scene load_steps=11 format=3 uid="uid://3yt3ebdew1jm"]
 
 [ext_resource type="Script" path="res://scripts/bomb_enemy.gd" id="1_kx3n1"]
-[ext_resource type="Material" uid="uid://bhqsipjp6txyo" path="res://Butano_placeholder.tres" id="2_meykp"]
 [ext_resource type="Texture2D" uid="uid://bjda2x223sp7j" path="res://sprites/IMG_3094.png" id="2_rnerg"]
 [ext_resource type="Script" path="res://scripts/timer.gd" id="3_7cprt"]
-[ext_resource type="Material" uid="uid://b6yp3tetotxhv" path="res://Butano_exploder_placeholder.tres" id="3_wui53"]
+[ext_resource type="Texture2D" uid="uid://c8rwjvypfmujb" path="res://sprites/IMG_3114.png" id="3_etyju"]
 [ext_resource type="Texture2D" uid="uid://cqqkd54aqvqnt" path="res://sprites/IMG_3093.png" id="6_qsmog"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_qsgex"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wkg68"]
 
@@ -45,18 +42,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_bm8mo"]
 resource_name = "tic_tac"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:material_override")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [ExtResource("2_meykp"), ExtResource("3_wui53"), ExtResource("2_meykp")]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_amulf"]
 _data = {
@@ -74,11 +59,10 @@ script = ExtResource("1_kx3n1")
 transform = Transform3D(0.285464, 0, 0, 0, 0.285464, 0, 0, 0, 0.285464, 0, 0.501614, 0)
 texture = ExtResource("2_rnerg")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Gum" type="Sprite3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.076194, 0.00557423, 1.76809)
 visible = false
-mesh = SubResource("SphereMesh_qsgex")
-skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("2_meykp")
+texture = ExtResource("3_etyju")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)

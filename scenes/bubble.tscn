@@ -7,23 +7,6 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xpvbf"]
 
-[sub_resource type="Animation" id="Animation_16gne"]
-resource_name = "bubbleFlickering"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-
 [sub_resource type="Animation" id="Animation_xk6ld"]
 length = 0.001
 tracks/0/type = "value"
@@ -43,6 +26,23 @@ tracks/0/keys = {
 resource_name = "bubbbleBubbeling"
 length = 0.8
 loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_16gne"]
+resource_name = "bubbleFlickering"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t7bce"]
 _data = {
