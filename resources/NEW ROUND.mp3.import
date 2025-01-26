@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://x8ymeek3ym5o"
+path="res://.godot/imported/NEW ROUND.mp3-67585de5e40e80a59b80a16d35485290.mp3str"
+
+[deps]
+
+source_file="res://resources/NEW ROUND.mp3"
+dest_files=["res://.godot/imported/NEW ROUND.mp3-67585de5e40e80a59b80a16d35485290.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -8,12 +8,13 @@ const chargedScale = 0.20
 const nonChargedScale = 0.10
 const verticalOffset = 0.1
 const horizontalOffset = 0.2
-const maxKnockbackSpeed = 1.5
+const maxKnockbackSpeed = 1
 const timeKnockback = 0.1
 
 const damageArea = 15
 const gumArea = 10
 
+@onready var shieldBubble = $Sprite3D2
 @onready var sprite = $Sprite3D
 @onready var bubble_scene = preload("res://scenes/bubble.tscn")
 @onready var bubble_gum_scene = preload("res://scenes/bubble_gum.tscn")
@@ -35,7 +36,7 @@ var knockback = Vector3.ZERO
 
 var shield = true
 var invulnerable = false
-var invulnerableTime = 1.0
+var invulnerableTime = 2.05
 
 func _input(event):
 	if Input.is_action_just_released("bubble") and coolDownBubble <= 0 and chargingBubble != null:
@@ -94,11 +95,13 @@ func _physics_process(delta: float) -> void:
 		var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")	
 		var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		if direction:
-			animation.play("playerRun")
+			if not invulnerable:
+				animation.play("playerRun")
 			velocity.x = direction.x * SPEED
 			velocity.z = direction.z * SPEED
 		else:
-			animation.play("playerIdle")
+			if not invulnerable:
+				animation.play("playerIdle")
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			velocity.z = move_toward(velocity.z, 0, SPEED)
 	else:
@@ -120,7 +123,7 @@ func _physics_process(delta: float) -> void:
 		$Pivot.look_at(Vector3(result.position.x, 0, result.position.z))
 		sprite.flip_h = position.x - result.position.x >= 0
 
-func	_on_damage(position: Vector3):
+func	 _on_damage(position: Vector3):
 	# DEJAR
 	if knockbackSpeed <= 0:
 		var enemyCoor = transform.origin
@@ -128,9 +131,21 @@ func	_on_damage(position: Vector3):
 		knockbackSpeed = maxKnockbackSpeed
 	if shield and not invulnerable:
 		shield = false
+		shieldBubble.visible = false
 		invulnerable = true
-		print("hit")
 		$Invulnerability.start(invulnerableTime)
+		animation.play("playerDamage")
+		var shieldKnock = bubble_scene.instantiate()
+		shieldKnock.get_child(0).visible = false
+		shieldKnock.explode = true
+		shieldKnock.transform.origin = global_position + Vector3(0,verticalOffset,0)
+		scaleOriginal = shieldKnock.get_child(0).transform.basis.get_scale()
+		shieldKnock.direction = Vector3.ZERO
+		shieldKnock.get_child(0).scale = scaleOriginal*chargedScale
+		shieldKnock.get_child(1).scale = Vector3.ONE*chargedScale
+		shieldKnock.get_child(2).scale = damageArea*Vector3.ONE*chargedScale
+		parent.add_child(shieldKnock)
+		#shieldKnock.queue_free()
 		#$Shield.visibility.visible = true
 	elif not invulnerable:
 		var	deathScreen = preload("res://scenes/death.tscn").instantiate()
