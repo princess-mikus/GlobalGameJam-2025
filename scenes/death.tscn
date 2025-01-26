@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://r45ml8tohqxq"]
+[gd_scene load_steps=5 format=3 uid="uid://r45ml8tohqxq"]
 
 [ext_resource type="Script" path="res://scripts/death.gd" id="1_8f8j3"]
 [ext_resource type="Texture2D" uid="uid://dfs6ke1r16qj5" path="res://icon.svg" id="1_xshot"]
 [ext_resource type="AudioStream" uid="uid://dms3yp3p35nv2" path="res://resources/booohwav-14768.mp3" id="3_5ocvc"]
+[ext_resource type="FontFile" uid="uid://blviyffgcc0db" path="res://resources/font2.ttf" id="3_ietcv"]
 
 [node name="Death" type="Node2D"]
 process_mode = 3
@@ -24,6 +25,7 @@ offset_right = 12.0
 offset_bottom = 398.0
 grow_vertical = 0
 size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("3_ietcv")
 theme_override_font_sizes/font_size = 64
 text = "PLAY AGAIN"
 
@@ -33,15 +35,16 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 11.0
+offset_left = 9.0
 offset_top = 144.0
-offset_right = 570.0
+offset_right = 568.0
 offset_bottom = 398.0
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_ietcv")
 theme_override_font_sizes/font_size = 64
-text = "MAIN MENU"
+text = "MAIN   MENU"
 
 [node name="DeathText" type="RichTextLabel" parent="."]
 anchors_preset = 5
@@ -55,7 +58,7 @@ grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 bbcode_enabled = true
-text = "[font_size=128][center]YOU'VE MET A TERRIBLE FATE"
+text = "[font_size=128][font=resources/font2.ttf][center]YOU'VE MET A TERRIBLE FATE"
 fit_content = true
 
 [node name="BoohAudio" type="AudioStreamPlayer" parent="."]

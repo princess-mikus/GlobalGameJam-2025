@@ -12,7 +12,7 @@ load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.cte
 position = Vector2(580, 340)
 
 [node name="mainBackground" type="Sprite2D" parent="."]
-modulate = Color(128.498, 1, 1, 1)
+modulate = Color(0, 0, 0, 1)
 scale = Vector2(7000, 3888.82)
 texture = SubResource("CompressedTexture2D_hdsop")
 
@@ -24,7 +24,7 @@ offset_top = -296.0
 offset_right = 302.0
 offset_bottom = -128.0
 bbcode_enabled = true
-text = "[center][font=resources/font2.ttf][font_size=150][color=black]SETTINGS"
+text = "[center][font=resources/font2.ttf][font_size=150][color=white]SETTINGS"
 fit_content = true
 autowrap_mode = 0
 metadata/_edit_use_anchors_ = true
@@ -35,7 +35,8 @@ offset_top = 96.0
 offset_right = 532.0
 offset_bottom = 264.0
 bbcode_enabled = true
-text = "[center][font=resources/font2.ttf][font_size=150][color=black]back"
+text = "[center][font=resources/font2.ttf][font_size=150][color=white
+]back"
 fit_content = true
 autowrap_mode = 0
 metadata/_edit_use_anchors_ = true
@@ -55,7 +56,7 @@ offset_top = -88.0
 offset_right = -267.0
 offset_bottom = 63.0
 bbcode_enabled = true
-text = "[center][font=resources/font.ttf][font_size=70][color=black]volumen"
+text = "[center][font=resources/font.ttf][font_size=70][color=wite]volumen"
 fit_content = true
 autowrap_mode = 0
 metadata/_edit_use_anchors_ = true
@@ -66,29 +67,30 @@ offset_top = 15.0
 offset_right = -267.0
 offset_bottom = 166.0
 bbcode_enabled = true
-text = "[center][font=resources/font.ttf][font_size=70][color=black]brigth"
+text = "[center][font=resources/font.ttf][font_size=70][color=white]brigth"
 fit_content = true
 autowrap_mode = 0
 metadata/_edit_use_anchors_ = true
 
 [node name="fullScreen" type="RichTextLabel" parent="."]
-offset_left = -578.0
-offset_top = 218.0
-offset_right = -267.0
-offset_bottom = 369.0
+offset_left = -557.0
+offset_top = 157.0
+offset_right = -246.0
+offset_bottom = 308.0
 bbcode_enabled = true
-text = "[center][font=resources/font.ttf][font_size=70][color=black]fullscreen"
+text = "[center][font=resources/font.ttf][font_size=70][color=white]fullscreen"
 fit_content = true
 autowrap_mode = 0
 metadata/_edit_use_anchors_ = true
 
 [node name="highContrast" type="RichTextLabel" parent="."]
+visible = false
 offset_left = -578.0
 offset_top = 114.0
 offset_right = -267.0
 offset_bottom = 265.0
 bbcode_enabled = true
-text = "[center][font=resources/font.ttf][font_size=70][color=black]high contrast"
+text = "[center][font=resources/font.ttf][font_size=70][color=white]high contrast"
 fit_content = true
 autowrap_mode = 0
 metadata/_edit_use_anchors_ = true
@@ -117,18 +119,32 @@ script = ExtResource("1_r5qa2")
 metadata/_edit_use_anchors_ = true
 
 [node name="highContrastCheck" type="CheckBox" parent="."]
+visible = false
 offset_left = -152.0
 offset_top = 114.0
 offset_right = -128.0
 offset_bottom = 138.0
 scale = Vector2(2.64116, 2.64116)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_disabled_color = Color(1, 1, 1, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="fullscreenCheck" type="CheckBox" parent="."]
-offset_left = -152.0
-offset_top = 211.0
-offset_right = -128.0
-offset_bottom = 235.0
+offset_left = -180.0
+offset_top = 153.0
+offset_right = -156.0
+offset_bottom = 177.0
 scale = Vector2(2.64116, 2.64116)
 script = ExtResource("2_2oqcf")
 metadata/_edit_use_anchors_ = true
